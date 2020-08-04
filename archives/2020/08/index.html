@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Necc Joe">
   <meta name="keywords" content="">
-  <title>Django一些常用操作 - Nestcc Space</title>
+  <title>归档 - Nestcc Space</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -139,49 +139,28 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="page-content">
-  <h1 id="判断用户是否登录"><a href="#判断用户是否登录" class="headerlink" title="判断用户是否登录"></a>判断用户是否登录</h1><pre><code class="hljs python">request.user.is_authenticated</code></pre>
-
-
-
-<h1 id="需要用户登录"><a href="#需要用户登录" class="headerlink" title="需要用户登录"></a>需要用户登录</h1><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib.auth.mixins <span class="hljs-keyword">import</span> LoginRequiredMixin
-
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyView</span><span class="hljs-params">(LoginRequiredMixin, View)</span>:</span>
-    login_url = <span class="hljs-string">'/login/'</span>
-    redirect_field_name = <span class="hljs-string">'redirect_to'</span></code></pre>
-
-<p>或者</p>
-<pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib.auth.decorators <span class="hljs-keyword">import</span> login_required
-
-<span class="hljs-meta">@login_required</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_view</span><span class="hljs-params">(request)</span>:</span>
-    ...</code></pre>
-
-
-
-<h1 id="Model中datetime默认为当前时间"><a href="#Model中datetime默认为当前时间" class="headerlink" title="Model中datetime默认为当前时间"></a>Model中datetime默认为当前时间</h1><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.utils.timezone <span class="hljs-keyword">import</span> now
-
-models.DateTimeField(default=now)</code></pre>
-
-
-
-
-
-<h1 id="图片删除"><a href="#图片删除" class="headerlink" title="图片删除"></a>图片删除</h1><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delete</span><span class="hljs-params">(self, using=None, keep_parents=False)</span>:</span>
-    storage, path = self.image.storage, self.image.path
-    storage.delete(path)
-    super(NepArticleImage, self).delete()</code></pre>
-
-
-
-<h1 id="3-0后xframe显示"><a href="#3-0后xframe显示" class="headerlink" title="3.0后xframe显示"></a>3.0后xframe显示</h1><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.views.decorators.clickjacking <span class="hljs-keyword">import</span> xframe_options_exempt
-
-<span class="hljs-meta">@xframe_options_exempt</span>
-<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__</span><span class="hljs-params">(request)</span>:</span>
-    ...</code></pre>
-
-
+<div class="list-group">
+  <p class="h4">共计 9 篇文章</p>
+  <hr>
+  
+    
+      
+      <p class="h5">2020</p>
+    
+    <a href="/2020/08/04/eulerproject-02/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Project Euler Problem 2 欧拉计划2</span>
+      <span style="float: right;">08-04</span>
+    </a>
+  
+    
+    <a href="/2020/08/03/cpp-stl-vector/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">C++STL标准库实现2——Vector 实现</span>
+      <span style="float: right;">08-03</span>
+    </a>
+  
 </div>
+
+
 
               </div>
             </div>
@@ -270,7 +249,7 @@ models.DateTimeField(default=now)</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Django一些常用操作&nbsp;",
+        "归档&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

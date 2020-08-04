@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Necc Joe">
   <meta name="keywords" content="">
-  <title>Ubuntu安装MySQL踩坑 - Nestcc Space</title>
+  <title>C++的运算符及部分数学函数 - Nestcc Space</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -123,8 +123,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-07-29 20:04">
-                    2020年7月29日 晚上
+                  <time datetime="2020-07-30 18:50">
+                    2020年7月30日 晚上
                   </time>
                 </div>
               
@@ -134,7 +134,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    310 字
+                    459 字
                   </span>
                 
 
@@ -144,7 +144,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    5
+                    6
                      分钟
                   </span>
                 
@@ -173,56 +173,126 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="在阿里云Ubuntu主机上安装MySQL"><a href="#在阿里云Ubuntu主机上安装MySQL" class="headerlink" title="在阿里云Ubuntu主机上安装MySQL"></a>在阿里云Ubuntu主机上安装MySQL</h1><h2 id="1-运行如下命令"><a href="#1-运行如下命令" class="headerlink" title="1. 运行如下命令"></a>1. 运行如下命令</h2><pre><code class="hljs bash">sudo apt-get install mysql-server
-
-sudo apt-get isntall mysql-client
-
-sudo apt-get install libmysqlclient-dev</code></pre>
-
-
-
-<h2 id="2-改密码（天坑）"><a href="#2-改密码（天坑）" class="headerlink" title="2. 改密码（天坑）"></a>2. 改密码（天坑）</h2><h4 id="1-sudo-vim-etc-mysql-mysql-conf-d-mysqld-cnf"><a href="#1-sudo-vim-etc-mysql-mysql-conf-d-mysqld-cnf" class="headerlink" title="1. sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf"></a>1. sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</h4><p>找到如下内容</p>
-<pre><code class="hljs plain">31 user        &#x3D; mysql
-32 pid-file    &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.pid
-33 socket      &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.sock
-34 port        &#x3D; 3306
-35 basedir     &#x3D; &#x2F;usr
-36 datadir     &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql
-37 tmpdir      &#x3D; &#x2F;tmp
-38 lc-messages-dir &#x3D; &#x2F;usr&#x2F;share&#x2F;mysql
-39 skip-external-locking
-40 skip-grant-tables</code></pre>
-
-<p>添加 skip-grant-tables</p>
-<p>以安全模式启动MySQL</p>
-<h4 id="2-sudo-service-mysql-restart"><a href="#2-sudo-service-mysql-restart" class="headerlink" title="2. sudo service mysql restart"></a>2. sudo service mysql restart</h4><p>重启mysql服务</p>
-<p>MySQL启动之后就可以不用密码登陆了</p>
-<h4 id="3-查看一下user表"><a href="#3-查看一下user表" class="headerlink" title="3. 查看一下user表"></a>3. 查看一下user表</h4><pre><code class="hljs bash">mysql&gt; select user, plugin from mysql.user;
-+------------------+-----------------------+
-| user             | plugin                |
-+------------------+-----------------------+
-| root             | auth_socket           |
-| mysql.session    | mysql_native_password |
-| mysql.sys        | mysql_native_password |
-| debian-sys-maint | mysql_native_password |
-+------------------+-----------------------+
-4 rows <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)</code></pre>
-
-
-
-<h4 id="4-（重点）update-mysql-user-set-authentication-string-PASSWORD-‘newPwd’-plugin-’mysql-native-password’-where-user-’root’"><a href="#4-（重点）update-mysql-user-set-authentication-string-PASSWORD-‘newPwd’-plugin-’mysql-native-password’-where-user-’root’" class="headerlink" title="4. （重点）update mysql.user set authentication_string=PASSWORD(‘newPwd’), plugin=’mysql_native_password’ where user=’root’;"></a>4. （重点）update mysql.user set authentication_string=PASSWORD(‘newPwd’), plugin=’mysql_native_password’ where user=’root’;</h4><p>需要将root的plugin修改为mysql_native_password</p>
-<h4 id="5-flush-privileges"><a href="#5-flush-privileges" class="headerlink" title="5. flush privileges;"></a>5. flush privileges;</h4><p>刷新权限</p>
-<h4 id="6-将mysqld-cnf改回，重启MySQL服务"><a href="#6-将mysqld-cnf改回，重启MySQL服务" class="headerlink" title="6. 将mysqld.cnf改回，重启MySQL服务"></a>6. 将mysqld.cnf改回，重启MySQL服务</h4><pre><code class="hljs bas">31 user        &#x3D; mysql
-32 pid-file    &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.pid
-33 socket      &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.sock
-34 port        &#x3D; 3306
-35 basedir     &#x3D; &#x2F;usr
-36 datadir     &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql
-37 tmpdir      &#x3D; &#x2F;tmp
-38 lc-messages-dir &#x3D; &#x2F;usr&#x2F;share&#x2F;mysql
-39 skip-external-locking
-40 # skip-grant-tables</code></pre>
-
+              <h1 id="1-位运算符-amp-、-、-、"><a href="#1-位运算符-amp-、-、-、" class="headerlink" title="1. 位运算符(&amp;、|、^、~ )"></a>1. 位运算符(&amp;、|、^、~ )</h1><table>
+<thead>
+<tr>
+<th align="left">p</th>
+<th align="left">q</th>
+<th align="left">p &amp; q</th>
+<th align="left">p | q</th>
+<th align="left">p ^ q</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>  假设变量 <strong>A</strong> 的值为 60，变量 <strong>B</strong> 的值为 13，则：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&amp;</td>
+<td align="left">按位与操作，按二进制位进行”与”运算。运算规则：<code>0&amp;0=0;    0&amp;1=0;     1&amp;0=0;      1&amp;1=1;</code></td>
+<td align="left">(A &amp; B) 将得到 12，即为 0000 1100</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">按位或运算符，按二进制位进行”或”运算。运算规则：`0</td>
+<td align="left">0=0;    0</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">异或运算符，按二进制位进行”异或”运算。运算规则：<code>0^0=0;    0^1=1;    1^0=1;   1^1=0;</code></td>
+<td align="left">(A ^ B) 将得到 49，即为 0011 0001</td>
+</tr>
+<tr>
+<td align="left">~</td>
+<td align="left">取反运算符，按二进制位进行”取反”运算。运算规则：<code>~1=0;    ~0=1;</code></td>
+<td align="left">(~A ) 将得到 -61，即为 1100 0011，一个有符号二进制数的补码形式。</td>
+</tr>
+</tbody></table>
+<h1 id="2-左移右移-lt-lt-、-gt-gt"><a href="#2-左移右移-lt-lt-、-gt-gt" class="headerlink" title="2. 左移右移(&lt;&lt;、&gt;&gt;)"></a>2. 左移右移(&lt;&lt;、&gt;&gt;)</h1><blockquote>
+<p>  假设变量 <strong>A</strong> 的值为 60，变量 <strong>B</strong> 的值为 13，则：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">描述</th>
+<th align="left">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">&lt;&lt;</td>
+<td align="left">二进制左移运算符。将一个运算对象的各二进制位全部左移若干位（左边的二进制位丢弃，右边补0，相当于原值*2。</td>
+<td align="left">A &lt;&lt; 2 将得到 240，即为 1111 0000</td>
+</tr>
+<tr>
+<td align="left">&gt;&gt;</td>
+<td align="left">二进制右移运算符。将一个数的各二进制位全部右移若干位，正数左补0，负数左补1，右边丢弃，相当于原值/2。</td>
+<td align="left">A &gt;&gt; 2 将得到 15，即为 0000 1111</td>
+</tr>
+</tbody></table>
+<h1 id="3-下取整-floor"><a href="#3-下取整-floor" class="headerlink" title="3. 下取整 floor()"></a>3. 下取整 floor()</h1><ul>
+<li>头文件math.h</li>
+<li>原型：int floor(double x)</li>
+</ul>
+<h1 id="4-取整数绝对值-abs"><a href="#4-取整数绝对值-abs" class="headerlink" title="4. 取整数绝对值 abs()"></a>4. 取整数绝对值 abs()</h1><ul>
+<li>头文件 stdlib.h</li>
+<li>原型：int abs(int x)</li>
+</ul>
+<h1 id="5-取实数绝对值-fabs"><a href="#5-取实数绝对值-fabs" class="headerlink" title="5. 取实数绝对值 fabs()"></a>5. 取实数绝对值 fabs()</h1><ul>
+<li>math.h</li>
+<li>double fabs(double x)</li>
+</ul>
+<h1 id="6-取e的对数-log"><a href="#6-取e的对数-log" class="headerlink" title="6. 取e的对数 log()"></a>6. 取e的对数 log()</h1><ul>
+<li>math.h</li>
+<li>double log(double x)</li>
+</ul>
+<h1 id="7-取10的对数-log10"><a href="#7-取10的对数-log10" class="headerlink" title="7. 取10的对数 log10()"></a>7. 取10的对数 log10()</h1><ul>
+<li>math.h</li>
+<li>double log19(double x)</li>
+</ul>
+<h1 id="8-arccos，acos"><a href="#8-arccos，acos" class="headerlink" title="8. arccos，acos()"></a>8. arccos，acos()</h1><ul>
+<li>math.h</li>
+<li>double acos(double x)</li>
+</ul>
+<blockquote>
+<p>  acos(-1) = pi</p>
+</blockquote>
 
             </article>
             <hr>
@@ -232,7 +302,7 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Dev/">Dev</a>
+                      <a class="hover-with-bg" href="/categories/course/">course</a>
                     
                   </div>
                 
@@ -240,9 +310,9 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Development/">Development</a>
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
                     
-                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                      <a class="hover-with-bg" href="/tags/operator/">operator</a>
                     
                   </div>
                 
@@ -255,9 +325,9 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/30/operator/">
+                      <a href="/2020/07/31/django-model-admin/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++的运算符及部分数学函数</span>
+                        <span class="hidden-mobile">Django ModelAdmin的使用</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -265,8 +335,8 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/28/eulerproject-00/">
-                        <span class="hidden-mobile">Project Euler Problem 1 & Problem 6</span>
+                      <a href="/2020/07/29/ubuntu-mysql/">
+                        <span class="hidden-mobile">Ubuntu安装MySQL踩坑</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -406,7 +476,7 @@ sudo apt-get install libmysqlclient-dev</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Ubuntu安装MySQL踩坑&nbsp;",
+        "C++的运算符及部分数学函数&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
