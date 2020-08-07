@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Necc Joe">
   <meta name="keywords" content="">
-  <title>Ubuntu安装MySQL踩坑 - Nestcc Space</title>
+  <title>Project Euler Problem 8 欧拉计划8 - Nestcc Space</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -132,8 +132,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-07-29 20:04">
-                    2020年7月29日 晚上
+                  <time datetime="2020-08-04 15:27">
+                    2020年8月4日 下午
                   </time>
                 </div>
               
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    354 字
+                    212 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    5
+                    3
                      分钟
                   </span>
                 
@@ -182,60 +182,46 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="在阿里云Ubuntu主机上安装MySQL"><a href="#在阿里云Ubuntu主机上安装MySQL" class="headerlink" title="在阿里云Ubuntu主机上安装MySQL"></a>在阿里云Ubuntu主机上安装MySQL</h1><h2 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h2><p>运行如下命令</p>
-<pre><code class="hljs bash">sudo apt-get install mysql-server
-
-sudo apt-get isntall mysql-client
-
-sudo apt-get install libmysqlclient-dev</code></pre>
+              <h2 id="Largest-product-in-a-series"><a href="#Largest-product-in-a-series" class="headerlink" title="Largest product in a series"></a><strong>Largest product in a series</strong></h2><p>The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.</p>
+<pre><code class="hljs plain">73167176531330624919225119674426574742355349194934 96983520312774506326239578318016984801869478851843 85861560789112949495459501737958331952853208805511 12540698747158523863050715693290963295227443043557 66896648950445244523161731856403098711121722383113 62229893423380308135336276614282806444486645238749 30358907296290491560440772390713810515859307960866 70172427121883998797908792274921901699720888093776 65727333001053367881220235421809751254540594752243 52584907711670556013604839586446706324415722155397 53697817977846174064955149290862569321978468622482 83972241375657056057490261407972968652414535100474 82166370484403199890008895243450658541227588666881 16427171479924442928230863465674813919123162824586 17866458359124566529476545682848912883142607690042 24219022671055626321111109370544217506941658960408 07198403850962455444362981230987879927244284909188 84580156166097919133875499200524063689912560717606 05886116467109405077541002256983155200055935729725 71636269561882670428252483600823257530420752963450</code></pre>
 
 
 
-<h2 id="2-改密码（天坑）"><a href="#2-改密码（天坑）" class="headerlink" title="2. 改密码（天坑）"></a>2. 改密码（天坑）</h2><h4 id="1-sudo-vim-etc-mysql-mysql-conf-d-mysqld-cnf"><a href="#1-sudo-vim-etc-mysql-mysql-conf-d-mysqld-cnf" class="headerlink" title="1. sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf"></a>1. sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</h4><p>找到如下内容</p>
-<pre><code class="hljs plain">31 user        &#x3D; mysql
-32 pid-file    &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.pid
-33 socket      &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.sock
-34 port        &#x3D; 3306
-35 basedir     &#x3D; &#x2F;usr
-36 datadir     &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql
-37 tmpdir      &#x3D; &#x2F;tmp
-38 lc-messages-dir &#x3D; &#x2F;usr&#x2F;share&#x2F;mysql
-39 skip-external-locking
-40 skip-grant-tables</code></pre>
-
-<p>添加 skip-grant-tables</p>
-<p>以安全模式启动MySQL</p>
-<h4 id="2-sudo-service-mysql-restart"><a href="#2-sudo-service-mysql-restart" class="headerlink" title="2. sudo service mysql restart"></a>2. sudo service mysql restart</h4><p>重启mysql服务</p>
-<p>MySQL启动之后就可以不用密码登陆了</p>
-<h4 id="3-查看一下user表"><a href="#3-查看一下user表" class="headerlink" title="3. 查看一下user表"></a>3. 查看一下user表</h4><pre><code class="hljs bash">mysql&gt; select user, plugin from mysql.user;
-+------------------+-----------------------+
-| user             | plugin                |
-+------------------+-----------------------+
-| root             | auth_socket           |
-| mysql.session    | mysql_native_password |
-| mysql.sys        | mysql_native_password |
-| debian-sys-maint | mysql_native_password |
-+------------------+-----------------------+
-4 rows <span class="hljs-keyword">in</span> <span class="hljs-built_in">set</span> (0.00 sec)</code></pre>
+<p>Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?</p>
+<h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><pre><code class="hljs css">假设有数组<span class="hljs-selector-attr">[a b c d e f g h]</span>
+一个大小为3的滑动窗口在其上滑动，则有:
+<span class="hljs-selector-attr">[a b c]</span>
+  <span class="hljs-selector-attr">[b c d]</span>
+    <span class="hljs-selector-attr">[c d e]</span>
+      <span class="hljs-selector-attr">[d e f]</span>
+        <span class="hljs-selector-attr">[e f g]</span>
+          <span class="hljs-selector-attr">[f g h]</span></code></pre>
 
 
 
-<h4 id="4-（重点）update-mysql-user-set-authentication-string-PASSWORD-‘newPwd’-plugin-’mysql-native-password’-where-user-’root’"><a href="#4-（重点）update-mysql-user-set-authentication-string-PASSWORD-‘newPwd’-plugin-’mysql-native-password’-where-user-’root’" class="headerlink" title="4. （重点）update mysql.user set authentication_string=PASSWORD(‘newPwd’), plugin=’mysql_native_password’ where user=’root’;"></a>4. （重点）update mysql.user set authentication_string=PASSWORD(‘newPwd’), plugin=’mysql_native_password’ where user=’root’;</h4><p>需要将root的plugin修改为mysql_native_password</p>
-<h4 id="5-flush-privileges"><a href="#5-flush-privileges" class="headerlink" title="5. flush privileges;"></a>5. flush privileges;</h4><p>刷新权限</p>
-<h4 id="6-将mysqld-cnf改回，重启MySQL服务"><a href="#6-将mysqld-cnf改回，重启MySQL服务" class="headerlink" title="6. 将mysqld.cnf改回，重启MySQL服务"></a>6. 将mysqld.cnf改回，重启MySQL服务</h4><pre><code class="hljs bas">31 user        &#x3D; mysql
-32 pid-file    &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.pid
-33 socket      &#x3D; &#x2F;var&#x2F;run&#x2F;mysqld&#x2F;mysqld.sock
-34 port        &#x3D; 3306
-35 basedir     &#x3D; &#x2F;usr
-36 datadir     &#x3D; &#x2F;var&#x2F;lib&#x2F;mysql
-37 tmpdir      &#x3D; &#x2F;tmp
-38 lc-messages-dir &#x3D; &#x2F;usr&#x2F;share&#x2F;mysql
-39 skip-external-locking
-40 # skip-grant-tables</code></pre>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> max_n 1000</span>
 
+<span class="hljs-keyword">char</span> num[max_n + <span class="hljs-number">5</span>];
 
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span> (~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s"</span>, num + len)) len = <span class="hljs-built_in">strlen</span>(num);
+    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ans = <span class="hljs-number">0</span>, p = <span class="hljs-number">1</span>, zero = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; num[i]; i++) &#123;
+        num[i] -= <span class="hljs-string">'0'</span>;
+        <span class="hljs-keyword">if</span> (num[i]) p *= num[i];
+        <span class="hljs-keyword">else</span> zero += <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (i &lt; <span class="hljs-number">13</span>) <span class="hljs-keyword">continue</span>;
+        <span class="hljs-keyword">if</span> (num[i - <span class="hljs-number">13</span>]) p /= num[i - <span class="hljs-number">13</span>];
+        <span class="hljs-keyword">else</span> zero -= <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (zero == <span class="hljs-number">0</span> &amp;&amp; p &gt; ans) ans = p;
+    &#125;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, ans);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
 
-<h1 id="3-改编码方式"><a href="#3-改编码方式" class="headerlink" title="3. 改编码方式"></a>3. 改编码方式</h1><p>默认安装MySQL后编码方式不一定是utf8，这时如果我们往数据库中添加含中文的记录会报错。</p>
 
             </article>
             <hr>
@@ -245,7 +231,7 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Dev/">Dev</a>
+                      <a class="hover-with-bg" href="/categories/course/">course</a>
                     
                   </div>
                 
@@ -253,9 +239,9 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Development/">Development</a>
+                      <a class="hover-with-bg" href="/tags/C/">C++</a>
                     
-                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                      <a class="hover-with-bg" href="/tags/Euler-project/">Euler project</a>
                     
                   </div>
                 
@@ -268,9 +254,9 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/30/operator/">
+                      <a href="/2020/08/05/ubuntu-blog/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++的运算符及部分数学函数</span>
+                        <span class="hidden-mobile">ubuntu-blog</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -278,8 +264,8 @@ sudo apt-get install libmysqlclient-dev</code></pre>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/07/28/eulerproject-00/">
-                        <span class="hidden-mobile">Project Euler Problem 1 & Problem 6</span>
+                      <a href="/2020/08/04/eulerproject-02/">
+                        <span class="hidden-mobile">Project Euler Problem 2 欧拉计划2</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -419,7 +405,7 @@ sudo apt-get install libmysqlclient-dev</code></pre>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "Ubuntu安装MySQL踩坑&nbsp;",
+        "Project Euler Problem 8 欧拉计划8&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

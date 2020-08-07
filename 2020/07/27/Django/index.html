@@ -143,7 +143,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    104 字
+                    411 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    1
+                    6
                      分钟
                   </span>
                 
@@ -222,6 +222,68 @@ models.DateTimeField(default=now)</code></pre>
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__</span><span class="hljs-params">(request)</span>:</span>
     ...</code></pre>
 
+
+
+
+
+<h1 id="数据中有”-lt-”类似符号"><a href="#数据中有”-lt-”类似符号" class="headerlink" title="数据中有”&lt;”类似符号"></a>数据中有”&lt;”类似符号</h1><p>当传到template中的数据包含”&lt;”之类的符号，例如传入html片段时，若直接使用<h1 id="判断用户是否登录"><a href="#判断用户是否登录" class="headerlink" title="判断用户是否登录"></a>判断用户是否登录</h1><pre><code class="hljs python">request.user.is_authenticated</code></pre>
+
+
+
+<h1 id="需要用户登录"><a href="#需要用户登录" class="headerlink" title="需要用户登录"></a>需要用户登录</h1><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib.auth.mixins <span class="hljs-keyword">import</span> LoginRequiredMixin
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyView</span><span class="hljs-params">(LoginRequiredMixin, View)</span>:</span>
+    login_url = <span class="hljs-string">'/login/'</span>
+    redirect_field_name = <span class="hljs-string">'redirect_to'</span></code></pre>
+
+<p>或者</p>
+<pre><code class="hljs python"><span class="hljs-keyword">from</span> django.contrib.auth.decorators <span class="hljs-keyword">import</span> login_required
+
+<span class="hljs-meta">@login_required</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">my_view</span><span class="hljs-params">(request)</span>:</span>
+    ...</code></pre>
+
+
+
+<h1 id="Model中datetime默认为当前时间"><a href="#Model中datetime默认为当前时间" class="headerlink" title="Model中datetime默认为当前时间"></a>Model中datetime默认为当前时间</h1><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.utils.timezone <span class="hljs-keyword">import</span> now
+
+models.DateTimeField(default=now)</code></pre>
+
+
+
+
+
+<h1 id="图片删除"><a href="#图片删除" class="headerlink" title="图片删除"></a>图片删除</h1><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">delete</span><span class="hljs-params">(self, using=None, keep_parents=False)</span>:</span>
+    storage, path = self.image.storage, self.image.path
+    storage.delete(path)
+    super(NepArticleImage, self).delete()</code></pre>
+
+
+
+<h1 id="3-0后xframe显示"><a href="#3-0后xframe显示" class="headerlink" title="3.0后xframe显示"></a>3.0后xframe显示</h1><pre><code class="hljs python"><span class="hljs-keyword">from</span> django.views.decorators.clickjacking <span class="hljs-keyword">import</span> xframe_options_exempt
+
+<span class="hljs-meta">@xframe_options_exempt</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__</span><span class="hljs-params">(request)</span>:</span>
+    ...</code></pre>
+
+
+
+
+
+<h1 id="数据中有”-lt-”类似符号"><a href="#数据中有”-lt-”类似符号" class="headerlink" title="数据中有”&lt;”类似符号"></a>数据中有”&lt;”类似符号</h1><p>当传到template中的数据包含”&lt;”之类的符号，例如传入html片段时，若直接使用{{ content }}会导致”&lt;”被转码，进而使”&lt;”变为”&amp;gt;”。如：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p<span class="hljs-symbol">&amp;gt;</span>ssdasdsa<span class="hljs-symbol">&amp;lt;</span>/p<span class="hljs-symbol">&amp;gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> // <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>ssdasdsa<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+
+<p>需要改为一下写法：</p>
+<pre><code class="hljs plain">&#123;&#123; content | safe &#125;&#125;</code></pre>
+
+<p>其中 safe可以防止转意。</p>
+会导致”&lt;”被转码，进而使”&lt;”变为”&amp;gt;”。如：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p<span class="hljs-symbol">&amp;gt;</span>ssdasdsa<span class="hljs-symbol">&amp;lt;</span>/p<span class="hljs-symbol">&amp;gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> // <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>ssdasdsa<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
+
+<p>需要改为一下写法：</p>
+<pre><code class="hljs plain">&#123;&#123; content | safe &#125;&#125;</code></pre>
+
+<p>其中 safe可以防止转意。</p>
 
             </article>
             <hr>
