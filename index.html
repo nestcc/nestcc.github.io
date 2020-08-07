@@ -157,7 +157,60 @@
     
     
     <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/08/07/euler45/">euler45</a>
+      <a class="index-header" href="/2020/08/07/pe-05/">辗转相除、扩展欧几里得</a>
+
+      <a href="/2020/08/07/pe-05/" class="index-excerpt">
+        
+        
+          
+        
+        <div>辗转相除法(欧几里得算法)
+  定理: a和b的最大公因数等于b和a % b的最大公因数.
+  假设a, b != 0,则有gcd(a, b) = gcd(b, a % b).
+
+C++实现:
+#include &lt;stdio.h&gt;
+
+int gcd(int a, int b) &#123;
+    return (b ? gcd(b, a % b) : a);
+&#125;
+
+int </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>&nbsp;2020-08-07
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/course/">course</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">C++</a>
+            
+              <a href="/tags/Algorithm/">Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <div class="col-12 col-md-12 mx-auto index-info">
+      <a class="index-header" href="/2020/08/07/euler45/">欧拉计划45</a>
 
       <a href="/2020/08/07/euler45/" class="index-excerpt">
         
@@ -241,6 +294,13 @@ int g(int (*f1)(int), int (*f2)(int), int (*f3)(int)) &#123;
             <i class="iconfont icon-date"></i>&nbsp;2020-08-06
           </div>
         
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/course/">course</a>
+            
+          </div>
         
         
           <div class="post-meta">
@@ -565,100 +625,6 @@ admin.site.register</div>
               <a href="/tags/Development/">Development</a>
             
               <a href="/tags/Django/">Django</a>
-            
-          </div>
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <div class="col-12 col-md-12 mx-auto index-info">
-      <a class="index-header" href="/2020/07/30/operator/">C++的运算符及部分数学函数</a>
-
-      <a href="/2020/07/30/operator/" class="index-excerpt">
-        
-        
-          
-        
-        <div>1. 位运算符(&amp;、|、^、~ )
-
-
-p
-q
-p &amp; q
-p | q
-p ^ q
-
-
-
-0
-0
-0
-0
-0
-
-
-0
-1
-0
-1
-1
-
-
-1
-1
-1
-1
-0
-
-
-1
-0
-0
-1
-1
-
-
-
-  假设变量 A 的值为 60，变量 B 的值为 13，则：
-
-
-
-
-运算符
-描述
-实例
-
-
-
-&amp;
-按位与操作，按二进制位进行”与”运算。运算规则：0&amp;0=0;    0&amp;</div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>&nbsp;2020-07-30
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/course/">course</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/C/">C++</a>
-            
-              <a href="/tags/operator/">operator</a>
             
           </div>
         

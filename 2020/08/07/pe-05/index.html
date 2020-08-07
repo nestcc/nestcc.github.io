@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Necc Joe">
   <meta name="keywords" content="">
-  <title>C++ 函数 - Nestcc Space</title>
+  <title>辗转相除、扩展欧几里得 - Nestcc Space</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -132,8 +132,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-08-06 10:54">
-                    2020年8月6日 上午
+                  <time datetime="2020-08-07 21:12">
+                    2020年8月7日 晚上
                   </time>
                 </div>
               
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    209 字
+                    385 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    3
+                    6
                      分钟
                   </span>
                 
@@ -182,58 +182,66 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h1><p>把函数当作参数传入方程中。</p>
-<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">g</span><span class="hljs-params">(<span class="hljs-keyword">int</span> (*f1)(<span class="hljs-keyword">int</span>), <span class="hljs-keyword">int</span> (*f2)(<span class="hljs-keyword">int</span>), <span class="hljs-keyword">int</span> (*f3)(<span class="hljs-keyword">int</span>))</span> </span>&#123;
-    <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>) &#123;
-        <span class="hljs-keyword">return</span> f1(x);
-    &#125;
-    <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">100</span>) &#123;
-        <span class="hljs-keyword">return</span> f2(x);
-    &#125;
-    <span class="hljs-keyword">return</span> f3(x);
-&#125;</code></pre>
+              <h1 id="辗转相除法-欧几里得算法"><a href="#辗转相除法-欧几里得算法" class="headerlink" title="辗转相除法(欧几里得算法)"></a>辗转相除法(欧几里得算法)</h1><blockquote>
+<p>  定理: a和b的最大公因数等于b和a % b的最大公因数.</p>
+<p>  假设a, b != 0,则有gcd(a, b) = gcd(b, a % b).</p>
+</blockquote>
+<p>C++实现:</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
 
-
-
-<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><ol>
-<li>边界条件</li>
-<li>处理过程，递归过程</li>
-<li>返回</li>
-</ol>
-<h4 id="与数学归纳法类似"><a href="#与数学归纳法类似" class="headerlink" title="与数学归纳法类似"></a>与数学归纳法类似</h4><ol>
-<li>f(0) 成立                             ==&gt;    边界条件成立</li>
-<li>f(k)成立，f(k+1)成立        ==&gt;    处理过程</li>
-</ol>
-<h1 id="变参函数"><a href="#变参函数" class="headerlink" title="变参函数"></a>变参函数</h1><ul>
-<li>需要引入&lt;cstdarg&gt;头文件</li>
-</ul>
-<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, ...)</span></span>;</code></pre>
-
-<ul>
-<li>va_list                                        =&gt; 变参列表</li>
-<li>va_start()                                   =&gt; a后面的第一个参数</li>
-<li>va_arg()                                     =&gt; 下一个可变参数列表中的参数</li>
-<li>va_end()                                    =&gt; 结束获取可变参数列表的动作</li>
-</ul>
-<p>例：</p>
-<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">max_int</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, ...)</span> </span>&#123;
-    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;
-    va_list arg;
-    va_start(arg, n);
-    <span class="hljs-keyword">while</span> (n--) &#123;
-        <span class="hljs-keyword">int</span> tmp = va_arg(arg, <span class="hljs-keyword">int</span>);
-        <span class="hljs-keyword">if</span> (tmp &gt; ans) ans = tmp;
-    &#125;
-    va_end(arg);
-    
-    <span class="hljs-keyword">return</span> ans;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;
+    <span class="hljs-keyword">return</span> (b ? gcd(b, a % b) : a);
 &#125;
 
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    max_int(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">5</span>, <span class="hljs-number">3</span>);
-    <span class="hljs-comment">// ...</span>
+    <span class="hljs-keyword">int</span> a, b;
+    <span class="hljs-keyword">while</span> (~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;a, &amp;b)) &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, gcd(a, b));
+    &#125;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre>
+
+
+
+
+
+<h1 id="扩展欧几里得"><a href="#扩展欧几里得" class="headerlink" title="扩展欧几里得"></a>扩展欧几里得</h1><p>问: 求 $ax + by = 1$ 的一组整数解.</p>
+<p>设<br>$$<br>ax_1 + by_1 = gcd(a, b) \<br>bx_2 + (a % b)y_2 = gcd(b, a % b)<br>$$<br>根据欧几里德原理有 gcd(a,b) = gcd(b,a mod b)</p>
+<p>则:ax1+ by1= bx2+ (a mod b)y2;</p>
+<p>即:ax1+ by1= bx2+ (a - [a / b] * b)y2=ay2+ bx2- [a / b] * by2;</p>
+<p>说明： a-[a/b]*b即为mod运算。[a/b]代表取小于a/b的最大整数。</p>
+<p>也就是ax1+ by1 == ay2+ b(x2- [a / b] *y2);</p>
+<p>根据恒等定理得：<strong>x1=y2; y1=x2- [a / b] *y2</strong>;</p>
+<p>这样我们就得到了求解 x1,y1 的方法：<strong>x1，y1 的值基于 x2，y2</strong>.</p>
+<p>上面的思想是以递归定义的，因为 gcd 不断的递归求解一定会有个时候 b=0，所以递归可以结束。</p>
+<p><strong>递归边界：gcd（a,0）=1*a-0*0=a。</strong></p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ex_gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> *x, <span class="hljs-keyword">int</span> *y)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (!b) &#123;
+        *x = <span class="hljs-number">1</span>, *y = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">return</span> a;
+    &#125;
+    <span class="hljs-keyword">int</span> xx, yy, ret = ex_gcd(b, a % b, &amp;xx, &amp;yy);
+    *x = yy;
+    *y = xx - a / b * yy;
+    <span class="hljs-keyword">return</span> ret;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> a, b, x, y;
+    <span class="hljs-keyword">while</span> (~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;a, &amp;b)) &#123;
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"gcd(%d, %d) = %d\n"</span>, a, b, ex_gcd(a, b, &amp;x, &amp;y));
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d * %d + %d * %d = %d\n"</span>, a, x, b, y, a * x + b * y);
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+
+
+
+
+
 
 
             </article>
@@ -254,7 +262,7 @@
                     
                       <a class="hover-with-bg" href="/tags/C/">C++</a>
                     
-                      <a class="hover-with-bg" href="/tags/function/">function</a>
+                      <a class="hover-with-bg" href="/tags/Algorithm/">Algorithm</a>
                     
                   </div>
                 
@@ -267,18 +275,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/07/euler45/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">欧拉计划45</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/08/06/euler03/">
-                        <span class="hidden-mobile">Project Euler Problem 8 欧拉计划8</span>
+                      <a href="/2020/08/07/euler45/">
+                        <span class="hidden-mobile">欧拉计划45</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -418,7 +420,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "C++ 函数&nbsp;",
+        "辗转相除、扩展欧几里得&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
