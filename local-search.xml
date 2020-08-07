@@ -85,7 +85,7 @@
   
   
   <entry>
-    <title>欧拉计划8</title>
+    <title>欧拉计划3</title>
     <link href="/2020/08/06/euler03/"/>
     <url>/2020/08/06/euler03/</url>
     
@@ -168,7 +168,7 @@
   
   
   <entry>
-    <title>Project Euler Problem 8 欧拉计划8</title>
+    <title>欧拉计划8</title>
     <link href="/2020/08/04/EP8/"/>
     <url>/2020/08/04/EP8/</url>
     
@@ -238,9 +238,9 @@
     
     <tags>
       
-      <tag>C++</tag>
-      
       <tag>Development</tag>
+      
+      <tag>C++</tag>
       
     </tags>
     
@@ -330,7 +330,7 @@
   
   
   <entry>
-    <title>Project Euler Problem 1 &amp; Problem 6</title>
+    <title>欧拉计划1 &amp; 6</title>
     <link href="/2020/07/28/eulerproject-00/"/>
     <url>/2020/07/28/eulerproject-00/</url>
     
@@ -373,9 +373,9 @@
     
     <tags>
       
-      <tag>C++</tag>
-      
       <tag>Development</tag>
+      
+      <tag>C++</tag>
       
     </tags>
     
