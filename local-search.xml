@@ -4,6 +4,85 @@
   
   
   <entry>
+    <title>实现c语言中的printf()</title>
+    <link href="/2020/08/11/my-printf/"/>
+    <url>/2020/08/11/my-printf/</url>
+    
+    <content type="html"><![CDATA[<h1 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h1><p>我们将整个函数封装进一个头文件中，命名为”customprt.h”。在这个头文件中我们定义一个函数，命名为”custom_prt”。</p><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdarg&gt;</span></span><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">custom_prt</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* frm, ...)</span> </span>&#123;    ...&#125;</code></pre><h1 id="首先实现打印不带占位符的字符串"><a href="#首先实现打印不带占位符的字符串" class="headerlink" title="首先实现打印不带占位符的字符串"></a>首先实现打印不带占位符的字符串</h1><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">custom_prt</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* frm)</span> </span>&#123;<span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PUTC(a) putchar(a), count += 1</span><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; frm[i]; i++) &#123;PUTC(frm[i]);&#125;<span class="hljs-meta">#<span class="hljs-meta-keyword">undef</span> PUTC</span>&#125;</code></pre><p>我们可以使用putc()打印每一个字符。并把它封装进一个宏中。</p><h1 id="接下来我们处理存在占位符的情况"><a href="#接下来我们处理存在占位符的情况" class="headerlink" title="接下来我们处理存在占位符的情况"></a>接下来我们处理存在占位符的情况</h1><h2 id="发现”-…”时的处理"><a href="#发现”-…”时的处理" class="headerlink" title="发现”%…”时的处理"></a>发现”%…”时的处理</h2><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'%'</span>) &#123;<span class="hljs-comment">// 处理"%d","%s","%%"</span>    i += <span class="hljs-number">1</span>;<span class="hljs-comment">// 跳过"%.."后的'd','s','%'</span>    ...    &#125;<span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">// 否则直接打印</span>    PUTC(frm[i]);    count += <span class="hljs-number">1</span>;&#125;</code></pre><h2 id="处理”-”，打印一个’-’"><a href="#处理”-”，打印一个’-’" class="headerlink" title="处理”%%”，打印一个’%’"></a>处理”%%”，打印一个’%’</h2><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'%'</span>) &#123;    PUTC(frm[i]);    count += <span class="hljs-number">1</span>;&#125;</code></pre><h2 id="处理”-d”"><a href="#处理”-d”" class="headerlink" title="处理”%d”"></a>处理”%d”</h2><pre><code class="hljs c++"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'d'</span>) &#123;    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> x = va_arg(arg, <span class="hljs-keyword">int</span>);<span class="hljs-comment">// 处理INT32_MAX，INT32_MIN，需使用long long</span>    <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>) &#123;<span class="hljs-comment">// 负数情况处理</span>        PUTC(<span class="hljs-string">'-'</span>);        x = - x;        count += <span class="hljs-number">1</span>;    &#125;    <span class="hljs-keyword">char</span> tmp[<span class="hljs-number">20</span>];<span class="hljs-comment">// 以字符串形式存储数字</span>    <span class="hljs-keyword">int</span> digit = <span class="hljs-number">0</span>;<span class="hljs-comment">// 总位数</span>    <span class="hljs-keyword">do</span> &#123;        tmp[digit] = x % <span class="hljs-number">10</span> + <span class="hljs-string">'0'</span>;<span class="hljs-comment">// 将每一位存入tmp中，此时为倒序，如123存入后为['3','2','1']</span>        digit += <span class="hljs-number">1</span>;<span class="hljs-comment">// 位数 + 1</span>        x /= <span class="hljs-number">10</span>;    &#125; <span class="hljs-keyword">while</span> (x);    count += digit;    <span class="hljs-keyword">while</span> (digit--) &#123;<span class="hljs-comment">// 倒序打印</span>        PUTC(tmp[digit]);    &#125;&#125;</code></pre><h2 id="处理”-s”"><a href="#处理”-s”" class="headerlink" title="处理”%s”"></a>处理”%s”</h2><pre><code class="hljs c++"><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'s'</span>) &#123;    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* chr = va_arg(arg, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>*);    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; chr[i]; i += <span class="hljs-number">1</span>) &#123;        PUTC(chr[i]);        count += <span class="hljs-number">1</span>;    &#125;&#125;</code></pre><h2 id="完整程序"><a href="#完整程序" class="headerlink" title="完整程序"></a>完整程序</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> once</span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdarg&gt;</span></span><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">custom_prt</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* frm, ...)</span> </span>&#123;<span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>;va_list arg;va_start(arg, frm);<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PUTC(a) putchar(a), count += 1</span><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; frm[i]; i++) &#123;<span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'%'</span>) &#123;<span class="hljs-comment">// 处理"%d","%s","%%"</span>i += <span class="hljs-number">1</span>;<span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'%'</span>) &#123;PUTC(frm[i]);&#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'d'</span>) &#123;<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> x = va_arg(arg, <span class="hljs-keyword">int</span>);<span class="hljs-comment">// 处理INT32_MAX，INT32_MIN，需使用long long</span><span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>) &#123;<span class="hljs-comment">// 负数情况处理</span>PUTC(<span class="hljs-string">'-'</span>);x = - x;&#125;<span class="hljs-keyword">char</span> tmp[<span class="hljs-number">20</span>];<span class="hljs-comment">// 以字符串形式存储数字</span><span class="hljs-keyword">int</span> digit = <span class="hljs-number">0</span>;<span class="hljs-comment">// 总位数</span><span class="hljs-keyword">do</span> &#123;tmp[digit] = x % <span class="hljs-number">10</span> + <span class="hljs-string">'0'</span>;<span class="hljs-comment">// 将每一位存入tmp中，此时为倒序，如123存入后为['3','2','1']</span>digit += <span class="hljs-number">1</span>;<span class="hljs-comment">// 位数 + 1</span>x /= <span class="hljs-number">10</span>;&#125; <span class="hljs-keyword">while</span> (x);<span class="hljs-keyword">while</span> (digit--) &#123;<span class="hljs-comment">// 倒序打印</span>PUTC(tmp[digit]);&#125;&#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (frm[i] == <span class="hljs-string">'s'</span>) &#123;<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* chr = va_arg(arg, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>*);<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; chr[i]; i += <span class="hljs-number">1</span>) &#123;PUTC(chr[i]);&#125;&#125;&#125;<span class="hljs-keyword">else</span> &#123;<span class="hljs-comment">// 否则直接打印</span>PUTC(frm[i]);&#125;&#125;<span class="hljs-meta">#<span class="hljs-meta-keyword">undef</span> PUTC</span><span class="hljs-keyword">return</span> count;&#125;</code></pre><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>运行</p><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"customprt.h"</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cinttypes&gt;</span></span><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;custom_prt(<span class="hljs-string">"%d\n"</span>, INT32_MAX);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, INT32_MAX);custom_prt(<span class="hljs-string">"%d\n"</span>, <span class="hljs-number">-5</span>);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, <span class="hljs-number">-5</span>);custom_prt(<span class="hljs-string">"%d\n"</span>, INT32_MIN);<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, INT32_MIN);<span class="hljs-keyword">int</span> n = <span class="hljs-number">-500</span>;<span class="hljs-built_in">printf</span>(<span class="hljs-string">"has %d\n"</span>, custom_prt(<span class="hljs-string">"%d%s\n"</span>, n, <span class="hljs-string">"aa"</span>));<span class="hljs-built_in">printf</span>(<span class="hljs-string">"has %d\n"</span>, <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d%s\n"</span>, n, <span class="hljs-string">"aa"</span>));<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre><p>结果</p><pre><code class="hljs plain">21474836472147483647-5-5-2147483648-2147483648-500aahas 7-500aahas 7</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>欧拉计划17</title>
+    <link href="/2020/08/08/euler17/"/>
+    <url>/2020/08/08/euler17/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Number-letter-counts"><a href="#Number-letter-counts" class="headerlink" title="Number letter counts"></a><strong>Number letter counts</strong></h2><p>If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.</p><p>If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?</p><p><strong>NOTE:</strong> Do not count spaces or hyphens. For example, 342 (three hundred and forty-two) contains 23 letters and 115 (one hundred and fifteen) contains 20 letters. The use of “and” when writing out numbers is in compliance with British usage.</p><hr><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><span class="hljs-keyword">int</span> num1[<span class="hljs-number">20</span>] = &#123; <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>,  <span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span> &#125;;<span class="hljs-keyword">int</span> num2[<span class="hljs-number">10</span>] = &#123; <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span> &#125;;<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">get_letter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span> </span>&#123;<span class="hljs-keyword">if</span> (num &lt; <span class="hljs-number">20</span>) &#123; <span class="hljs-keyword">return</span> num1[num]; &#125;<span class="hljs-keyword">if</span> (num &lt; <span class="hljs-number">100</span>) &#123; <span class="hljs-keyword">return</span> num2[num / <span class="hljs-number">10</span>] + num1[num % <span class="hljs-number">10</span>]; &#125;<span class="hljs-keyword">if</span> (num &lt; <span class="hljs-number">1000</span>) &#123;<span class="hljs-keyword">if</span> (num % <span class="hljs-number">100</span> == <span class="hljs-number">0</span>) &#123; <span class="hljs-keyword">return</span> num1[num / <span class="hljs-number">100</span>] + <span class="hljs-number">7</span>; &#125;<span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> num1[num / <span class="hljs-number">100</span>] + <span class="hljs-number">10</span> + get_letter(num % <span class="hljs-number">100</span>); &#125;&#125;<span class="hljs-keyword">return</span> <span class="hljs-number">11</span>;&#125;<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-keyword">int</span> res = <span class="hljs-number">0</span>;<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">1000</span>; i += <span class="hljs-number">1</span>) &#123;res += get_letter(i);&#125;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Euler project</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>欧拉计划5</title>
+    <link href="/2020/08/08/euler05/"/>
+    <url>/2020/08/08/euler05/</url>
+    
+    <content type="html"><![CDATA[<h2 id="Smallest-multiple"><a href="#Smallest-multiple" class="headerlink" title="Smallest multiple"></a><strong>Smallest multiple</strong></h2><p>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p><p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p><hr><p>问题可等同于求1-20的最小公倍数。</p><p>方法：lcm(1, 2) =&gt; lcm(lcm(1, 2), 3) =&gt; lcm(lcm(…), 20)</p><p>其中，lcm(a, b) = (a * b) / gcd(a, b)</p><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> max_n 20</span><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;    <span class="hljs-keyword">return</span> (b ? gcd(b, a % b) : a);&#125;<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">1</span>;        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= max_n; i += <span class="hljs-number">1</span>) &#123;        ans *= i / gcd(ans, i);    &#125;        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans);    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Euler project</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>辗转相除、扩展欧几里得</title>
     <link href="/2020/08/07/pe-05/"/>
     <url>/2020/08/07/pe-05/</url>
@@ -238,9 +317,9 @@
     
     <tags>
       
-      <tag>Development</tag>
-      
       <tag>C++</tag>
+      
+      <tag>Development</tag>
       
     </tags>
     
@@ -373,9 +452,9 @@
     
     <tags>
       
-      <tag>Development</tag>
-      
       <tag>C++</tag>
+      
+      <tag>Development</tag>
       
     </tags>
     
