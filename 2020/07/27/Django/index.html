@@ -226,7 +226,7 @@ models.DateTimeField(default=now)</code></pre>
 
 
 
-<h1 id="数据中有”-lt-”类似符号"><a href="#数据中有”-lt-”类似符号" class="headerlink" title="数据中有”&lt;”类似符号"></a>数据中有”&lt;”类似符号</h1><p>当传到template中的数据包含”&lt;”之类的符号，例如传入html片段时，若直接使用<h1 id="判断用户是否登录"><a href="#判断用户是否登录" class="headerlink" title="判断用户是否登录"></a>判断用户是否登录</h1><pre><code class="hljs python">request.user.is_authenticated</code></pre>
+<h1 id="数据中有”-lt-”类似符号"><a href="#数据中有”-lt-”类似符号" class="headerlink" title="数据中有”&lt;”类似符号"></a>数据中有”&lt;”类似符号</h1><p>当传到template中的数据包含”&lt;”之类的符号，例如传入html片段时，若直接使用</p><h1 id="判断用户是否登录"><a href="#判断用户是否登录" class="headerlink" title="判断用户是否登录"></a>判断用户是否登录</h1><pre><code class="hljs python">request.user.is_authenticated</code></pre>
 
 
 
@@ -277,7 +277,7 @@ models.DateTimeField(default=now)</code></pre>
 <pre><code class="hljs plain">&#123;&#123; content | safe &#125;&#125;</code></pre>
 
 <p>其中 safe可以防止转意。</p>
-会导致”&lt;”被转码，进而使”&lt;”变为”&amp;gt;”。如：</p>
+会导致”&lt;”被转码，进而使”&lt;”变为”&amp;gt;”。如：<p></p>
 <pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-symbol">&amp;lt;</span>p<span class="hljs-symbol">&amp;gt;</span>ssdasdsa<span class="hljs-symbol">&amp;lt;</span>/p<span class="hljs-symbol">&amp;gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> // <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>ssdasdsa<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></code></pre>
 
 <p>需要改为一下写法：</p>
