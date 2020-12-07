@@ -150,12 +150,13 @@
 
 <div class="page-content">
   <h1 id="如何查找元素"><a href="#如何查找元素" class="headerlink" title="如何查找元素"></a>如何查找元素</h1><p>现有一个单调数组，和一个待查找的元素x，如何何种查找法具有最好的时间复杂度。</p>
-<p><img src="C:%5CmyProjects%5CnccBlog%5Csource%5Cbinary-search%5CSnipaste_2020-08-15_09-27-41.png" srcset="/img/loading.gif" alt="Snipaste_2020-08-15_09-27-41"></p>
+<p><img src="../_img/Snipaste_2020-08-15_09-27-41.png" srcset="/img/loading.gif" alt="Snipaste_2020-08-15_09-27-41"></p>
 <p>最简单，也是最容易想到的方法是一个一个在数组里查找。但如果该数组长度为1亿的话，我们就需要查找1亿次，效率不好。</p>
 <h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><h1 id="附加1：0，1问题"><a href="#附加1：0，1问题" class="headerlink" title="附加1：0，1问题"></a>附加1：0，1问题</h1><p>假设有如下一个数组：<br>$$<br>0, 0, 0, … , 0, 0, 1, 1, 1, 1, …<br>$$<br>如何找到第一个1？</p>
 <h2 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h2><p>left <code>&lt;</code> right:</p>
-<p>mid -&gt; 0: left = mid + 1</p>
-<p>mid -&gt; 1: right = <code>mid</code></p>
+<p><strong>mid = (left + right) / 2</strong></p>
+<p>mid -&gt; 0 : left = mid + 1</p>
+<p>mid -&gt; 1 : right = <code>mid</code></p>
 <pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bs01</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
     <span class="hljs-keyword">int</span> mid;
     <span class="hljs-keyword">while</span> (left &lt; right) &#123;
@@ -171,8 +172,30 @@
     <span class="hljs-keyword">return</span> left;
 &#125;</code></pre>
 
-<p><strong>注意处理数组全为0的情况</strong></p>
-<p><strong>以及每次计算mid之后，mid==right的情况，该情况下会发生死循环</strong></p>
+
+
+
+
+<h1 id="附加2：1，0问题"><a href="#附加2：1，0问题" class="headerlink" title="附加2：1，0问题"></a>附加2：1，0问题</h1><p>假设有如下一个数组：<br>$$<br>1, 1, 1, 1, 0, 0, 0, 0, …<br>$$<br>如何找到最后一个1？</p>
+<h2 id="二分法-1"><a href="#二分法-1" class="headerlink" title="二分法"></a>二分法</h2><p>left &lt; right:</p>
+<p><strong>mid = (left + right + 1) / 2</strong> </p>
+<p>mid -&gt; 1 : left = mid</p>
+<p>mid -&gt; 0 : right = mid - 1</p>
+<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bs01</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
+    <span class="hljs-keyword">int</span> mid;
+    <span class="hljs-keyword">while</span> (left &lt; right) &#123;
+        mid = (left + right + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">if</span> (arr[mid] == <span class="hljs-number">0</span>) &#123;
+            left = mid;
+        &#125;
+        <span class="hljs-keyword">else</span> &#123;
+            right = mid - <span class="hljs-number">1</span>;
+        &#125;
+    &#125;
+    
+    <span class="hljs-keyword">return</span> left;
+&#125;</code></pre>
+
 
 </div>
 

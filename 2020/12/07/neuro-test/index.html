@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Necc Joe">
   <meta name="keywords" content="">
-  <title>二分查找 - Nestcc Space</title>
+  <title>Neuroinformatics and Neurotechnologies - Nestcc Space</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -132,8 +132,8 @@
               
                 <div class="mt-3 post-meta">
                   <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-                  <time datetime="2020-08-15 09:23">
-                    2020年8月15日 上午
+                  <time datetime="2020-12-07 10:41">
+                    2020年12月7日 上午
                   </time>
                 </div>
               
@@ -143,7 +143,7 @@
                   
                   <span class="post-meta mr-2">
                     <i class="iconfont icon-chart"></i>
-                    284 字
+                    933 字
                   </span>
                 
 
@@ -153,7 +153,7 @@
                       <i class="iconfont icon-clock-fill"></i>
                     
                     
-                    4
+                    18
                      分钟
                   </span>
                 
@@ -182,83 +182,66 @@
           <div class="post-content mx-auto" id="post">
             
             <article class="markdown-body">
-              <h1 id="如何查找元素"><a href="#如何查找元素" class="headerlink" title="如何查找元素"></a>如何查找元素</h1><p>现有一个单调数组，和一个待查找的元素x，如何何种查找法具有最好的时间复杂度。</p>
-<p><img src=".._img%5CSnipaste_2020-08-15_09-27-41.png" srcset="/img/loading.gif" alt="Snipaste_2020-08-15_09-27-41"></p>
-<p>最简单，也是最容易想到的方法是一个一个在数组里查找。但如果该数组长度为1亿的话，我们就需要查找1亿次，效率不好。</p>
-<h1 id="附加1：0，1问题"><a href="#附加1：0，1问题" class="headerlink" title="附加1：0，1问题"></a>附加1：0，1问题</h1><p>假设有如下一个数组：<br>$$<br>0, 0, 0, … , 0, 0, 1, 1, 1, 1, …<br>$$<br>如何找到第一个1？</p>
-<h2 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h2><p>left <code>&lt;</code> right:</p>
-<p><strong>mid = (left + right) / 2</strong></p>
-<p>mid -&gt; 0 : left = mid + 1</p>
-<p>mid -&gt; 1 : right = <code>mid</code></p>
-<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bs01</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
-    <span class="hljs-keyword">int</span> mid;
-    <span class="hljs-keyword">while</span> (left &lt; right) &#123;
-        mid = (left + right) &gt;&gt; <span class="hljs-number">1</span>;
-        <span class="hljs-keyword">if</span> (arr[mid] == <span class="hljs-number">1</span>) &#123;
-            right = mid;
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            left = mid + <span class="hljs-number">1</span>;
-        &#125;
-    &#125;
-    
-    <span class="hljs-keyword">return</span> left;
-&#125;</code></pre>
-
-
-
-
-
-<h1 id="附加2：1，0问题"><a href="#附加2：1，0问题" class="headerlink" title="附加2：1，0问题"></a>附加2：1，0问题</h1><p>假设有如下一个数组：<br>$$<br>1, 1, 1, 1, 0, 0, 0, 0, …<br>$$<br>如何找到最后一个1？</p>
-<h2 id="二分法-1"><a href="#二分法-1" class="headerlink" title="二分法"></a>二分法</h2><p>left &lt; right:</p>
-<p><strong>mid = (left + right + 1) / 2</strong> </p>
-<p>mid -&gt; 1 : left = mid</p>
-<p>mid -&gt; 0 : right = mid - 1</p>
-<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bs01</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span> target)</span> </span>&#123;
-    <span class="hljs-keyword">int</span> mid;
-    <span class="hljs-keyword">while</span> (left &lt; right) &#123;
-        mid = (left + right + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;
-        <span class="hljs-keyword">if</span> (arr[mid] == <span class="hljs-number">0</span>) &#123;
-            left = mid;
-        &#125;
-        <span class="hljs-keyword">else</span> &#123;
-            right = mid - <span class="hljs-number">1</span>;
-        &#125;
-    &#125;
-    
-    <span class="hljs-keyword">return</span> left;
-&#125;</code></pre>
-
-
-
-
-
-
-
-
-
+              <h1 id="1-Science-“Neuroinformatics”-what-is-it"><a href="#1-Science-“Neuroinformatics”-what-is-it" class="headerlink" title="1.Science “Neuroinformatics” -  what is it?"></a>1.Science “Neuroinformatics” -  what is it?</h1><p>modern theory about principles and new mathematical models of information processing, which based on the biological prototypes and mechanisms of human brain activities</p>
+<h1 id="2-Artificial-intellect-in-technical-systems"><a href="#2-Artificial-intellect-in-technical-systems" class="headerlink" title="2.Artificial intellect in technical  systems."></a>2.Artificial intellect in technical  systems.</h1><p>A set of scientific branches which aims to modeling of reasonable intellectual action in human mind.  </p>
+<ol>
+<li><strong>Representation and accumulation of knowledge,</strong> </li>
+<li><strong>The ability of reasoning to retrieve relevant information</strong></li>
+<li><strong>The ability of adaptation by learning and self-organization</strong></li>
+<li><strong>Optimal team behavior for goal achievement or hierarchy of targets, role models</strong></li>
+<li><strong>Meaning analysis, semantic, crisp logic, rules of inference, emotions</strong></li>
+</ol>
+<h1 id="3-Paradigms-of-Neuroinformatics"><a href="#3-Paradigms-of-Neuroinformatics" class="headerlink" title="3.Paradigms of Neuroinformatics."></a>3.Paradigms of Neuroinformatics.</h1><p><strong>Pattern Manipulation Paradigm in Brain Computer</strong></p>
+<p>The main difference between human and traditional computer comes from the fact that humans perceive everything as a pattern, whereas for a machine everything is digitals data.  </p>
+<h1 id="4-Neurocomputer-and-artificial-neural-networks"><a href="#4-Neurocomputer-and-artificial-neural-networks" class="headerlink" title="4. Neurocomputer and artificial neural networks"></a>4. Neurocomputer and artificial neural networks</h1><h2 id="Brain-like-computer"><a href="#Brain-like-computer" class="headerlink" title="Brain-like computer"></a>Brain-like computer</h2><p>is a mathematical model of humane-brain principles of computations. This computer consists of those  elements which can be called the biological neuron prototypes, which are interconnected by direct links called connections and which cooperate to perform parallel distributed processing (PDP) in order to solve a desired computational task.</p>
+<p>Neurocomputer may be described as  a mathematical model which has been created in the image and likeness of human brain. Mathematicians suggest dramatically new high-performance models of massive parallelism in data processing and data storage, ways of analysis and calculus results interpretation, formal models creation and knowledge data, artificial intelligent systems. </p>
+<h2 id="ANN"><a href="#ANN" class="headerlink" title="ANN"></a>ANN</h2><p>ANN is an assembly of a simple processing elements – neurons which are interconnected by direct links and which cooperate in order to solve a desired computational task.</p>
+<p>Every neuron of ANN can be interpreted as an elementary processing unit with multiple inputs and non-linear transformation of bioelectrical signal excitations .</p>
+<h1 id="5-Formal-neurons-and-its-biological-prototype"><a href="#5-Formal-neurons-and-its-biological-prototype" class="headerlink" title="5.Formal neurons and its biological prototype."></a>5.Formal neurons and its biological prototype.</h1><p>  More general math model of ANN theory is known as the basic or <strong>Formal neuron</strong>. It can be describe as a multi-input nonlinear transformer with weighted interconnections, also called synaptic weights or strengths (<em>w<strong>1</strong>,w<strong>2</strong>, …,<strong>w</strong>n</em>  ). The cell body (soma) is represented by a nonlinear limiting or threshold activation function . </p>
+<ol>
+<li><p><strong>Soma</strong> <strong>or</strong> <strong>body cell</strong> <strong>-</strong> is a large, round central body in which almost all the logical functions of the neuron are realized.</p>
+</li>
+<li><p><strong>The axon</strong> <strong>(output**</strong>)**, is a nerve fibre attached to the soma which can serve as a final output channel of the neuron. An axon is usually highly branched.</p>
+</li>
+<li><p><strong>The dendrites</strong> <strong>(inputs)-</strong> represent a highly branching tree of fibres. These long irregularly shaped nerve fibres (processes) are attached to the soma. </p>
+</li>
+<li><p><strong>Synapses</strong> are specialized contacts on a neuron which are the termination points for the axons from other neurons. </p>
+</li>
+</ol>
+<h1 id="6-Mathematical-interpretation-of-excitation-nonlinear-activation-and-dynamic-behavior-of-artificial-neuron"><a href="#6-Mathematical-interpretation-of-excitation-nonlinear-activation-and-dynamic-behavior-of-artificial-neuron" class="headerlink" title="6. Mathematical interpretation of excitation, nonlinear activation and dynamic behavior of artificial neuron."></a>6. Mathematical interpretation of excitation, nonlinear activation and dynamic behavior of artificial neuron.</h1><p>In artificial neural networks, the <strong>activation function</strong> of a node defines the output of that node given an input or set of inputs. A standard integrated circuit can be seen as a digital network of activation functions that can be “ON” (1) or “OFF” (0), depending on input. This is similar to the behavior of the linear perceptron in neural networks.</p>
+<h2 id="excitation"><a href="#excitation" class="headerlink" title="excitation"></a>excitation</h2><p><img src="../_img/Snipaste_2020-12-07_10-17-52.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-07_10-17-52"></p>
+<h2 id="nonlinear-activation"><a href="#nonlinear-activation" class="headerlink" title="nonlinear activation"></a>nonlinear activation</h2><p><img src="../_img/Snipaste_2020-12-07_10-17-52.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-07_10-17-52"></p>
+<h2 id="dynamic-behavior"><a href="#dynamic-behavior" class="headerlink" title="dynamic behavior"></a>dynamic behavior</h2><p><img src="../_img/Snipaste_2020-12-07_10-24-29.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-07_10-24-29"></p>
+<h1 id="7-Types-of-artificial-neuron-models"><a href="#7-Types-of-artificial-neuron-models" class="headerlink" title="7.Types of artificial neuron models"></a>7.Types of artificial neuron models</h1><p>Depending on the specific model used they may be called a <strong>semi-linear unit</strong>, <strong>Nv neuron</strong>, <strong>binary neuron</strong>, <strong>linear threshold function</strong>, or <strong>McCulloch–Pitts</strong> (<strong>MCP</strong>) <strong>neuron</strong>.</p>
+<h1 id="8-Artificial-Neural-networks-ANN-linear-and-non-linear-models"><a href="#8-Artificial-Neural-networks-ANN-linear-and-non-linear-models" class="headerlink" title="8.Artificial Neural networks (ANN): linear and non-linear models."></a>8.Artificial Neural networks (ANN): linear and non-linear models.</h1><p>Linear models are usually some linear transformation applied to the input whose parameters needs to be learned, like classification whose decision boundary looks like the hyper-plane, i.e. labels are [nearly] linearly separable.</p>
+<p>In the neural nets, you apply such transformation to the input, and then right after that, you pass the resulting vector to the non-linear function. Why do we do a such thing? Most of the processes in nature are very complex for various reasons. One such reason is that there are always some hidden variables that we don’t know about (or simply can’t observe), which have great impact on the output of the process. Because of all this, we can’t only use matrix multiplications in our neural networks to solve this problem. That’s why we use some non-linear functions on top of linear transformations (feeding the weight-input product to the sigmoid, ReLU, etc.) to create non-linear decision boundaries in hope to fit and generalize at the same time.</p>
+<h1 id="9-Topology-of-ANN"><a href="#9-Topology-of-ANN" class="headerlink" title="9. Topology of ANN."></a>9. Topology of ANN.</h1><blockquote>
+<p><a href="https://towardsdatascience.com/the-mostly-complete-chart-of-neural-networks-explained-3fb6f2367464" target="_blank" rel="noopener">Full</a></p>
+</blockquote>
+<ol>
+<li>Perceptron</li>
+<li>Feed forward neural networks</li>
+<li>DFF neural networks</li>
+<li>Recurrent Neural Networks</li>
+<li>LSTM (long/ short term memory)</li>
+</ol>
+<h1 id="10-Learning-paradigms-of-ANN"><a href="#10-Learning-paradigms-of-ANN" class="headerlink" title="10.Learning paradigms of ANN."></a>10.Learning paradigms of ANN.</h1><blockquote>
+<p> <a href="https://medium.com/swlh/learning-paradigms-in-neural-networks-30854975aa8d" target="_blank" rel="noopener">Link</a></p>
+</blockquote>
+<h2 id="Supervised-Learning"><a href="#Supervised-Learning" class="headerlink" title="Supervised Learning"></a>Supervised Learning</h2><p>In supervised learning, we have a very clear and defined goal to predict something using our data. In this manner, we usually use this approach to solve problems of classification or regression.</p>
+<h2 id="Unsupervised-Learning"><a href="#Unsupervised-Learning" class="headerlink" title="Unsupervised Learning"></a>Unsupervised Learning</h2><p>In unsupervised learning, the goal is to discover patterns and trends within a dataset and then use those patterns to make predictions about new data. Within the context of a neural network, the goal is to determine the organization of the dataset it is fed.</p>
+<h2 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h2><p>This style of learning is distinct from the other two because it has a specific goal that it is pushing the machine to move towards. There is a specific outcome that is expected, the machine chooses and learns the most optimal path to achieve it. The way this is accomplished is through providing the machine with rewards and punishments based on its performance that culminate in a long-term end-goal. Rewards and punishment signals are only received by the machine when the machine achieves a new state. Instantaneous feedback is not a part of this paradigm of learning.</p>
 
             </article>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/algorithm/">algorithm</a>
-                    
-                  </div>
-                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/algorithm/">algorithm</a>
-                    
-                      <a class="hover-with-bg" href="/tags/array/">array</a>
-                    
-                      <a class="hover-with-bg" href="/tags/search/">search</a>
+                      <a class="hover-with-bg" href="/tags/master-s-course/">master's course</a>
                     
                   </div>
                 
@@ -271,18 +254,12 @@
                   <div class="post-prev col-6">
                     
                     
-                      <a href="/2020/08/15/cpp-define-1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">C++宏定义</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </div>
                   <div class="post-next col-6">
                     
                     
-                      <a href="/2020/08/13/cpp-pointer-1/">
-                        <span class="hidden-mobile">C++数组与指针</span>
+                      <a href="/2020/10/28/linux-user-1/">
+                        <span class="hidden-mobile">Linux用户管理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -422,7 +399,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "二分查找&nbsp;",
+        "Neuroinformatics and Neurotechnologies&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

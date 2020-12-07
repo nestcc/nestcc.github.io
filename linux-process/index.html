@@ -149,7 +149,63 @@
                 
 
 <div class="page-content">
-  
+  <h1 id="Linux-进程管理"><a href="#Linux-进程管理" class="headerlink" title="Linux 进程管理"></a>Linux 进程管理</h1><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>free</td>
+<td>打印系统情况和内存情况</td>
+<td>top</td>
+<td>显示当前系统进程、CPU、内存等情况</td>
+</tr>
+<tr>
+<td>dstat</td>
+<td>实时监控系统磁盘、内存、网络情况</td>
+<td>ps</td>
+<td>报告当前进程状态</td>
+</tr>
+<tr>
+<td>pstree</td>
+<td>以树状显示进程派生关系</td>
+<td>pgrep</td>
+<td>查找进程ID</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>删除执行中的程序和工作</td>
+<td>pkill</td>
+<td>批量按照进程名杀死进程</td>
+</tr>
+</tbody></table>
+<h1 id="dstat"><a href="#dstat" class="headerlink" title="dstat"></a>dstat</h1><pre><code class="hljs shell">dstat
+dstat 2					# 2秒一次
+dstat 2 10			# 2秒一次，一共10次
+dstat -list
+dstat 2 10 --output ... .csv</code></pre>
+
+
+
+<h1 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h1><pre><code class="hljs shell">ps -aux
+ps -ef</code></pre>
+
+
+
+<h1 id="pstree"><a href="#pstree" class="headerlink" title="pstree"></a>pstree</h1><pre><code class="hljs shell">pstree -[acGhlnpuU]</code></pre>
+
+<ul>
+<li>-a : 每个程序的完整指令</li>
+<li>-n : uid排序，计数</li>
+<li>-p : 显示pid</li>
+<li>-u : 显示用户名</li>
+<li>-l : 使用长列格式显示</li>
+</ul>
+
 </div>
 
               </div>

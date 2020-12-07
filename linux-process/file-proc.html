@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Necc Joe">
   <meta name="keywords" content="">
-  <title>归档 - Nestcc Space</title>
+  <title>基于文件的进程间通信 - Nestcc Space</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -148,82 +148,28 @@
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="list-group">
-  <p class="h4">共计 29 篇文章</p>
-  <hr>
-  
-    
-      
-      <p class="h5">2020</p>
-    
-    <a href="/2020/08/08/euler05/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">欧拉计划5</span>
-      <span style="float: right;">08-08</span>
-    </a>
-  
-    
-    <a href="/2020/08/07/pe-05/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">辗转相除、扩展欧几里得</span>
-      <span style="float: right;">08-07</span>
-    </a>
-  
-    
-    <a href="/2020/08/07/euler45/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">欧拉计划45</span>
-      <span style="float: right;">08-07</span>
-    </a>
-  
-    
-    <a href="/2020/08/06/func/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++ 函数</span>
-      <span style="float: right;">08-06</span>
-    </a>
-  
-    
-    <a href="/2020/08/06/euler03/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">欧拉计划3</span>
-      <span style="float: right;">08-06</span>
-    </a>
-  
-    
-    <a href="/2020/08/06/euler15/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">欧拉计划15</span>
-      <span style="float: right;">08-06</span>
-    </a>
-  
-    
-    <a href="/2020/08/04/EP8/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">欧拉计划8</span>
-      <span style="float: right;">08-04</span>
-    </a>
-  
-    
-    <a href="/2020/08/04/eulerproject-02/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">欧拉计划2</span>
-      <span style="float: right;">08-04</span>
-    </a>
-  
-    
-    <a href="/2020/08/03/cpp-stl-vector/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">C++STL标准库实现2——Vector 实现</span>
-      <span style="float: right;">08-03</span>
-    </a>
-  
+<div class="page-content">
+  <h1 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h1><ol>
+<li><p>设置一个并发度<code>INS</code>，表示要避开的进程数量</p>
+</li>
+<li><p>使用<code>INS</code>个进程，计算从<code>start</code>到<code>end</code>之间的数字累加和</p>
+<pre><code class="hljs shell">./add -s 10 -e 100 -i 5</code></pre>
+</li>
+<li><p><code>start</code>和<code>end</code>使用<code>getopt</code>解析命令行参数</p>
+</li>
+<li><p>输出一个整型<code>sum</code></p>
+</li>
+</ol>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ol>
+<li>使用<code>文件</code>进行数据共享，需考虑数据竞争<code>data race</code></li>
+<li>尝试使用<code>文件锁</code>来模拟线程间的<code>互斥锁</code></li>
+<li>通过<code>文件锁</code>实现了<code>临界数据</code>的同步访问</li>
+</ol>
+<h1 id="函数和接口"><a href="#函数和接口" class="headerlink" title="函数和接口"></a>函数和接口</h1><ol>
+<li>flock</li>
+</ol>
+
 </div>
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/archives/2020/08/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/2020/08/">1</a><span class="page-number current">2</span>
-    </span>
-  </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
-
-
 
               </div>
             </div>
@@ -312,7 +258,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "归档&nbsp;",
+        "基于文件的进程间通信&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

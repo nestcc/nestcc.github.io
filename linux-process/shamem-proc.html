@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Necc Joe">
   <meta name="keywords" content="">
-  <title>page.title - Nestcc Space</title>
+  <title>基于共享内存的进程间通讯方式 - Nestcc Space</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
@@ -149,17 +149,19 @@
                 
 
 <div class="page-content">
-  <h1>!/bin/bash</h1>
+  <h1 id="所需接口"><a href="#所需接口" class="headerlink" title="所需接口"></a>所需接口</h1><ol>
+<li>shmget</li>
+</ol>
+<h1 id="shmget"><a href="#shmget" class="headerlink" title="shmget"></a>shmget</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>获得一块System V的共享内存段。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/ipc.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/shm.h&gt;</span></span>
 
-<p>for each in <code>ls | grep -v _</code> 
-do
-    pagenum=1
-    for each<em>file in <code>ls $each | grep .md$</code> 
-    do 
-        echo "move $each/$each</em>file to _post/$each-$pagenum | grep .md$\n"
-        pagenum=$pagenum+1
-    done
-done</p>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">shmget</span><span class="hljs-params">(<span class="hljs-keyword">key_t</span> key, <span class="hljs-keyword">size_t</span> <span class="hljs-built_in">size</span>, <span class="hljs-keyword">int</span> shmflg)</span></span>;</code></pre>
+
+<p>key_t : 关键词类型</p>
+<p>size : 所需空间大小</p>
+<p>shmflg : 申请时的flag</p>
+<p>return : 返回共享内存段id</p>
 
 </div>
 
@@ -250,7 +252,7 @@ done</p>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "page.title&nbsp;",
+        "基于共享内存的进程间通讯方式&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
