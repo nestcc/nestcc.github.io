@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Necc Joe">
+  <meta name="keywords" content="">
+  <title>C++宏定义 - Nestcc Space</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Nest Space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/cover.jfif') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h1 id="如何使用宏"><a href="#如何使用宏" class="headerlink" title="如何使用宏"></a>如何使用宏</h1><p>所有带“#”的代码都是宏，例如<strong>#include &lt;cstdio&gt;</strong>就是一个宏。</p>
+<p>我们有如下几种定义宏的方法。</p>
+<h2 id="定义符号常量"><a href="#定义符号常量" class="headerlink" title="定义符号常量"></a>定义符号常量</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PI 3.1415926</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_N 10000</span></code></pre>
+
+
+
+<h2 id="定义表达式"><a href="#定义表达式" class="headerlink" title="定义表达式"></a>定义表达式</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX(a, b) (a) &gt; (b) ? (a) : (b)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> S(a, b) a * b</span></code></pre>
+
+
+
+<h2 id="定义代码段"><a href="#定义代码段" class="headerlink" title="定义代码段"></a>定义代码段</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> P(a) &#123; \</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, a); \
+&#125;</code></pre>
+
+
+
+<h2 id="变参宏"><a href="#变参宏" class="headerlink" title="变参宏"></a>变参宏</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> log(frm, args...) &#123;\</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"[%s : %d] %s = "</span>, __func__, __LINE__, #args);\
+	<span class="hljs-built_in">printf</span>(frm, ##args);\
+	<span class="hljs-built_in">print</span>(<span class="hljs-string">"\n"</span>);\
+&#125;</code></pre>
+
+
+
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>宏仅作代码替换操作，不做逻辑处理</strong></p>
+<p>例如：</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> S(a, b) a * b</span></code></pre>
+
+<p>如果我们调用：</p>
+<pre><code class="hljs c++">S(<span class="hljs-number">2</span> + <span class="hljs-number">3</span>, <span class="hljs-number">4</span> + <span class="hljs-number">5</span>)</code></pre>
+
+<p>代码会被替换成：</p>
+<pre><code class="hljs c++"><span class="hljs-number">2</span> + <span class="hljs-number">3</span> * <span class="hljs-number">4</span> + <span class="hljs-number">5</span></code></pre>
+
+
+
+<h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DEBUG</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> DEBUG</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> log(frm, args...) &#123;\</span>
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"[%s : %d] %s = "</span>, __func__, __LINE__, #args);\
+	<span class="hljs-built_in">printf</span>(frm, ##args);\
+	<span class="hljs-built_in">print</span>(<span class="hljs-string">"\n"</span>);\
+&#125;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> log(frm, args...)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></code></pre>
+
+<p>这样我们就定义了一个log宏，可以在debug时期打印log，如：</p>
+<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">int</span> a = <span class="hljs-number">123</span>;
+    <span class="hljs-built_in">log</span>(<span class="hljs-string">"%d"</span>, a);
+    <span class="hljs-built_in">log</span>(<span class="hljs-string">"Hello world"</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<p>如果我们进行完debug，不想再要打印信息了，只需要将”#define DEBUG”注释掉即可。这样log宏就会展开成空。</p>
+<p>我们可以使用命令添加宏，如：</p>
+<pre><code class="hljs bash">g++ -DDEBUG xxx.cpp	// 用于debug，有<span class="hljs-built_in">log</span>信息</code></pre>
+
+<pre><code class="hljs bash">g++ xxx.cpp // 用于执行，没有<span class="hljs-built_in">log</span>信息</code></pre>
+
+
+
+
+
+<h1 id="预定义的宏"><a href="#预定义的宏" class="headerlink" title="预定义的宏"></a>预定义的宏</h1><table>
+<thead>
+<tr>
+<th>说明</th>
+<th>函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>__DATE__</td>
+<td>日期：M mm dd yyyy</td>
+</tr>
+<tr>
+<td>__TIME__</td>
+<td>时间：hh:mm:ss</td>
+</tr>
+<tr>
+<td>__LINE__</td>
+<td>行号</td>
+</tr>
+<tr>
+<td>__FILE__</td>
+<td>文件名</td>
+</tr>
+<tr>
+<td>__func__</td>
+<td>函数名/非标准</td>
+</tr>
+<tr>
+<td>__FUNC__</td>
+<td>函数名/非标准</td>
+</tr>
+<tr>
+<td>__PRETTY_FUNCTION__</td>
+<td>更详细的函数信息/非标准</td>
+</tr>
+</tbody></table>
+<h1 id="条件式编译"><a href="#条件式编译" class="headerlink" title="条件式编译"></a>条件式编译</h1><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>#ifdef DEBUG</td>
+<td>是否定义了DEBUG</td>
+</tr>
+<tr>
+<td>#idndef DEBUG</td>
+<td>是否没有定义DEBUG</td>
+</tr>
+<tr>
+<td>#if MAX_N == 5</td>
+<td>宏MAX_N是否等于5</td>
+</tr>
+<tr>
+<td>#elif MAX_N == 4</td>
+<td>否则宏MAX_N是否等于4</td>
+</tr>
+<tr>
+<td>#else</td>
+<td></td>
+</tr>
+<tr>
+<td>#endif</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="预处理命令"><a href="#预处理命令" class="headerlink" title="预处理命令"></a>预处理命令</h1><p><img src="C:%5CmyProjects%5CnccBlog%5Csource%5Ccppdefine%5Ccppdefineproc.png" srcset="/img/loading.gif" alt="cppdefineproc"></p>
+<p>宏的处理发生在预处理阶段，在编译阶段之前。</p>
+<p>c++编译器在预处理阶段会把所有的宏替换为代码，例如将”stdio.h”文件内容拷贝进来。</p>
+<p>由于宏的处理发生在预编译阶段，宏的执行速度也是最快的，其处理速度远快于函数。</p>
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "C++宏定义&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

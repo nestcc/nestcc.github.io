@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Necc Joe">
+  <meta name="keywords" content="">
+  <title>C结构体 - Nestcc Space</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Nest Space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/cover.jfif') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h1 id="C结构体"><a href="#C结构体" class="headerlink" title="C结构体"></a>C结构体</h1><p>C的结构体用于设计复杂类型。例如：</p>
+<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">person</span> &#123;</span>
+    <span class="hljs-keyword">char</span> name[<span class="hljs-number">20</span>];
+    <span class="hljs-keyword">int</span> age;
+    <span class="hljs-keyword">char</span> gender;
+    <span class="hljs-keyword">float</span> <span class="hljs-built_in">height</span>;
+&#125;;</code></pre>
+
+<p>其中<code>struct person</code>为变量名，而并非<code>person</code>。</p>
+<p><code>.</code>为直接引用符，<code>-&gt;</code>为间接引用符。</p>
+<h1 id="分配空间原则"><a href="#分配空间原则" class="headerlink" title="分配空间原则"></a>分配空间原则</h1><p><strong>默认情况下：</strong></p>
+<ol>
+<li>找对齐标准<br>先找一个占用空间最大的元素。例如在<code>person</code>中，最大的是<code>int</code>或<code>float</code>类型（4字节），4字节就是对其因素，每次开辟4个字节。<code>name</code>是字符串，不考虑。</li>
+<li>给每一个元素开辟空间。<br><code>name</code>占20个字节，开5次，<br><code>gender</code>占1个字节，但也分配4个字节。</li>
+</ol>
+<p><strong>使用宏：</strong></p>
+<p><strong>例：</strong></p>
+<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node1</span> &#123;</span>
+    <span class="hljs-keyword">char</span> a;
+    <span class="hljs-keyword">char</span> b;
+    <span class="hljs-keyword">int</span> c;
+&#125;;
+
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node2</span> &#123;</span>
+    <span class="hljs-keyword">char</span> a;
+    <span class="hljs-keyword">int</span> c;
+    <span class="hljs-keyword">char</span> b;
+&#125;;</code></pre>
+
+<p>以4字节为单位，<code>node1</code>先开辟4字节，可以放入<code>a</code>，<code>b</code>，之后再开辟4字节，放入<code>c</code>，总共占用8字节。</p>
+<p>同样以4字节为单位，<code>node2</code>先开辟4字节，仅可放入<code>a</code>，再开辟4字节，放入<code>c</code>，最后还需4字节放入<code>b</code>，总共占用12字节。</p>
+<h1 id="共用体"><a href="#共用体" class="headerlink" title="共用体"></a>共用体</h1><pre><code class="hljs c++"><span class="hljs-keyword">union</span> <span class="hljs-keyword">register</span> &#123;
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>
+        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte1;
+        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte2;
+        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte3;
+        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte4;
+    &#125; bytes;
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> number;
+&#125;</code></pre>
+
+<p>与结构体不同，共用体占用空间为占用空间最大元素的空间，上述共用体中，共占用4字节。如果改变byte1的内容，则number的内容也会改变。</p>
+<p>例如：</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">union</span> node &#123;
+    <span class="hljs-keyword">double</span> a;
+    <span class="hljs-keyword">char</span> b;
+    <span class="hljs-keyword">int</span> c;
+&#125;</code></pre>
+
+<p>占用情况：</p>
+<table>
+<thead>
+<tr>
+<th>a</th>
+<th>b</th>
+<th>c</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td>3</td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="判断大端机、小端机"><a href="#判断大端机、小端机" class="headerlink" title="判断大端机、小端机"></a>判断大端机、小端机</h1><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">is_little</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> num = <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">return</span> ((<span class="hljs-keyword">char</span>*)&amp;num)[<span class="hljs-number">0</span>];
+&#125;</code></pre>
+
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "C结构体&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

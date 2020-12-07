@@ -4,6 +4,300 @@
   
   
   <entry>
+    <title>Linux进程管理</title>
+    <link href="/2020/10/31/linux-process-1/"/>
+    <url>/2020/10/31/linux-process-1/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Linux用户管理</title>
+    <link href="/2020/10/28/linux-user-1/"/>
+    <url>/2020/10/28/linux-user-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="重要配置文件"><a href="#重要配置文件" class="headerlink" title="重要配置文件"></a>重要配置文件</h1><table><thead><tr><th>文件</th><th>内容</th></tr></thead><tbody><tr><td>/etc/passwd</td><td>用户，密码位，用户编号，归组编号，姓名，$HOME，$SHELL</td></tr><tr><td>/etc/shadow</td><td>用户，已加密密码，密码改动信息，密码策略</td></tr><tr><td>/etc/group</td><td>群组名，密码位，群组编号，组内用户</td></tr><tr><td>/etc/gshadow</td><td>群组密码相关文件</td></tr><tr><td>/etc/sudoers</td><td>用户名，权限定义，权限(sudo)</td></tr></tbody></table><h1 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h1><pre><code class="hljs plain">root:x:0:0:root:&#x2F;root:.&#x2F;shdaemon:x:1:1:daemon:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;sbin&#x2F;nologinbin:x:2:2:bin:&#x2F;bin:&#x2F;usr&#x2F;sbin&#x2F;nologinsys:x:3:3:sys:&#x2F;dev:&#x2F;usr&#x2F;sbin&#x2F;nologinsync:x:4:65534:sync:&#x2F;bin:&#x2F;bin&#x2F;sync</code></pre><table><thead><tr><th>root</th><th>x</th><th>0</th><th>0</th><th>root</th><th>/root</th><th>./sh</th></tr></thead><tbody><tr><td>账号名称</td><td>密码</td><td>uid</td><td>gid</td><td>用户信息</td><td>$HOME</td><td>$SHELL</td></tr></tbody></table><h1 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="/etc/shadow"></a>/etc/shadow</h1><pre><code class="hljs plain">root:$6$YUw2gL...&#x2F;&#x2F;:18472:0:99999:7:::daemon:*:18113:0:99999:7:::bin:*:18113:0:99999:7:::sys:*:18113:0:99999:7:::sync:*:18113:0:99999:7:::games:*:18113:0:99999:7:::</code></pre><table><thead><tr><th>root</th><th>$6…//</th><th>18472</th><th>0</th><th>99999</th><th>7</th><th>null</th><th>null</th><th>Null</th></tr></thead><tbody><tr><td>账户名称</td><td>加密后的密码</td><td>修改密码的日期</td><td>密码不可改动时间</td><td>密码需重新修改时间</td><td>密码变更期限提前警告</td><td>密码过期宽限时间</td><td>账户失效日期</td><td>保留</td></tr></tbody></table><h1 id="etc-group"><a href="#etc-group" class="headerlink" title="/etc/group"></a>/etc/group</h1><pre><code class="hljs plain">root:x:0:daemon:x:1:bin:x:2:sys:x:3:adm:x:4:syslogtty:x:5:</code></pre><table><thead><tr><th>root</th><th>x</th><th>0</th><th>null</th></tr></thead><tbody><tr><td>组名</td><td>密码位</td><td>gid</td><td>组内用户</td></tr></tbody></table><h1 id="etc-gshadow"><a href="#etc-gshadow" class="headerlink" title="/etc/gshadow"></a>/etc/gshadow</h1><pre><code class="hljs plain">root:*::daemon:*::bin:*::sys:*::adm:*::syslog</code></pre><table><thead><tr><th>root</th><th>*</th><th>null</th><th>Null</th></tr></thead><tbody><tr><td>组名</td><td>密码</td><td>管理员</td><td>组内用户</td></tr></tbody></table><h1 id="chsh-更改用户shell"><a href="#chsh-更改用户shell" class="headerlink" title="chsh 更改用户shell"></a>chsh 更改用户shell</h1><pre><code class="hljs bash">chsh -s Shell &lt;username&gt;</code></pre><h1 id="用户管理相关命令"><a href="#用户管理相关命令" class="headerlink" title="用户管理相关命令"></a>用户管理相关命令</h1><table><thead><tr><th>命令</th><th>说明</th><th>命令</th><th>说明</th></tr></thead><tbody><tr><td>su</td><td>切换用户</td><td>sudo</td><td>临时切换root用户</td></tr><tr><td>passwd</td><td>设定用户密码</td><td>gpasswd</td><td>设定群组密码</td></tr><tr><td>chsh</td><td>切换shell</td><td>usermod</td><td>修改用户账号</td></tr><tr><td>useradd</td><td>新建用户</td><td>userdel</td><td>删除用户</td></tr><tr><td>Id</td><td>显示用户信息</td><td>…</td><td>…</td></tr></tbody></table><h1 id="su-切换用户"><a href="#su-切换用户" class="headerlink" title="su 切换用户"></a>su 切换用户</h1><pre><code class="hljs shell">su [-lmpfc] &lt;username&gt;</code></pre><ul><li>- | -l : 重新登陆</li><li>-m | -p : 不更改环境变量</li><li>-c command : 切换后执行命令，并退出</li></ul><h1 id="sudo-临时切换到root"><a href="#sudo-临时切换到root" class="headerlink" title="sudo 临时切换到root"></a>sudo 临时切换到root</h1><pre><code class="hljs shell">sudo [-siul] &lt;command&gt;</code></pre><ul><li>-s : 切换为root shell</li><li>-i : 切换到root shell，并初始化</li><li>-u username | did : 执行命令的身份</li><li>-l : 显示自己的权限</li></ul><h1 id="passwd-设定用户密码"><a href="#passwd-设定用户密码" class="headerlink" title="passwd 设定用户密码"></a>passwd 设定用户密码</h1><pre><code class="hljs shell">passwd [-dleSxnf] &lt;username&gt;</code></pre><ul><li>-d : 清除密码</li><li>-l : 锁定账户</li><li>-e : 使密码过期</li><li>-S : 显示密码认证信息</li><li>-x days : 密码修改后最大使用天数</li><li>-n days : 密码修改间隔时间</li><li>-f : 更改用户信息</li><li>-i : 密码过期后宽限时间</li></ul><h1 id="gpasswd-设置组群及组群密码"><a href="#gpasswd-设置组群及组群密码" class="headerlink" title="gpasswd 设置组群及组群密码"></a>gpasswd 设置组群及组群密码</h1><pre><code class="hljs shell">gpassed [-adrAM] &lt;groupname&gt;</code></pre><ul><li>-a username : 将用户加入组群</li><li>-d username : 将用户从组群中移除</li><li>-r : 删除密码</li><li>-A username : 将用户设置为组群管理员</li><li>-M username1, username2, … : 设置组群成员</li></ul><h1 id="useradd-添加用户"><a href="#useradd-添加用户" class="headerlink" title="useradd 添加用户"></a>useradd 添加用户</h1><pre><code class="hljs shell">useradd [-dmMsugGnefcD] &lt;username&gt;</code></pre><ul><li>-d dir : 指定$HOME</li><li>-m : 自动建立$HOME</li><li>-M : 不自动建立$HOME</li><li>-s shell : 设置用户登陆shell</li><li>-u uid : 设置用户id</li><li>-g groupname : 设置用户归属组群</li><li>-G groupname : 设置用户归属附加组群</li><li>-n : 不建立以用户名为组群名称的组群</li><li>-e days : 设置账号过期时间，绝对时间</li><li>-f days : 缓冲时间，days天后关闭账号</li><li>-c string : 设置用户备注</li><li>-D [exp] : 更改预设值</li></ul><p>/etc/login.defs 新建用户规则</p><p>/etc/skel 新建用户默认文件</p><h1 id="userdel-删除用户"><a href="#userdel-删除用户" class="headerlink" title="userdel 删除用户"></a>userdel 删除用户</h1><pre><code class="hljs shell">userdel -r &lt;username&gt;</code></pre><ul><li>-r : 删除用户相关文件和目录（邮件，家目录）</li></ul><h1 id="usermod-命令"><a href="#usermod-命令" class="headerlink" title="usermod 命令"></a>usermod 命令</h1><pre><code class="hljs shell">usermod [-cdefgGlLsuU] &lt;username&gt;</code></pre><ul><li>-l username : 修改用户账号名称</li><li>-L : 锁定用户密码，使密码无效</li><li>-s shell : 修改用户登陆后所使用的shell</li><li>-u did : 修改用户uid</li><li>-U : 解除密码锁定 </li></ul><h1 id="Id-命令"><a href="#Id-命令" class="headerlink" title="Id 命令"></a>Id 命令</h1><pre><code class="hljs shell">id [-gGnru] &lt;username&gt;</code></pre><ul><li>-g : 下属所属组ID</li><li>-G : 显示附加组ID</li><li>-n : 显示用户，所属组码，或附加群组的名称</li><li>-u : 显示用户ID</li><li>-r : 显示实际ID</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>course</tag>
+      
+      <tag>linux</tag>
+      
+      <tag>shell</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>仿Google Test测试框架——1</title>
+    <link href="/2020/10/22/Ncctest1-1/"/>
+    <url>/2020/10/22/Ncctest1-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1-何为Google-Test"><a href="#1-何为Google-Test" class="headerlink" title="1. 何为Google Test"></a>1. 何为Google Test</h1><blockquote><p>Google Test是基于xUnit架构的C ++编程语言的单元测试库。该库是根据BSD 3条款许可发布的。它可以针对各种POSIX和Windows平台进行编译，允许对C源代码和C ++源代码进行单元测试，而只需对源代码进行最少的修改。这些测试本身可以一次运行一个，甚至可以一次调用全部运行。(维基百科)</p></blockquote><h1 id="2-如何安装及使用"><a href="#2-如何安装及使用" class="headerlink" title="2. 如何安装及使用"></a>2. 如何安装及使用</h1><ol><li><p>Google test 没有即开即用的版本，使用需要先使用cmake编译原项目才能使用，故我们需先准备cmake环境。</p></li><li><p>之后克隆GitHub仓库：</p><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> https://github.com/google/googletest.git</code></pre></li><li><p>之后运行如下命令进行编译</p><pre><code class="hljs bash">mkdir mybuild       <span class="hljs-comment"># Create a directory to hold the build output.</span><span class="hljs-built_in">cd</span> mybuildcmake <span class="hljs-variable">$&#123;GTEST_DIR&#125;</span>  <span class="hljs-comment"># Generate native build scripts.</span></code></pre></li><li><p>安装完成。。。</p></li></ol><h1 id="3-如何使用Google-Test"><a href="#3-如何使用Google-Test" class="headerlink" title="3. 如何使用Google Test"></a>3. 如何使用Google Test</h1><ol><li>需要在任意一段c++代码中引入头文件&lt;gtest/gtest.h&gt;。</li><li>使用TEST()宏创建测试用例。</li><li>在主函数中调用RUN_ALL_TESTS()函数。</li></ol><p>如下：</p><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><span class="hljs-comment">// using namespace std;</span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;gtest/gtest.h&gt;</span></span><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span></span>&#123;    <span class="hljs-keyword">return</span> a +b;&#125;TEST(testCase, test0)&#123;    EXPECT_EQ(add(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>), <span class="hljs-number">5</span>);    EXPECT_EQ(add(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>), <span class="hljs-number">7</span>);    ASSERT_EQ(add(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>), <span class="hljs-number">8</span>);    EXPECT_EQ(add(<span class="hljs-number">2</span>, <span class="hljs-number">4</span>), <span class="hljs-number">6</span>);&#125;<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span></span>&#123;  testing::InitGoogleTest(&amp;argc, argv);  <span class="hljs-keyword">return</span> RUN_ALL_TESTS();&#125;</code></pre><p>编译运行后就可得到如下结果：</p><pre><code class="hljs shell">[==========] Running 1 test from 1 test suite.[----------] Global test environment set-up.[----------] 1 test from testCase[ RUN      ] testCase.test0first.cpp:19: FailureExpected equality of these values:  add(1, 3)    Which is: 4  8[  FAILED  ] testCase.test0 (0 ms)[----------] 1 test from testCase (0 ms total)[----------] Global test environment tear-down[==========] 1 test from 1 test suite ran. (0 ms total)[  PASSED  ] 0 tests.[  FAILED  ] 1 test, listed below:[  FAILED  ] testCase.test0 1 FAILED TEST</code></pre>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>test</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C结构体</title>
+    <link href="/2020/08/22/cstructer-1/"/>
+    <url>/2020/08/22/cstructer-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C结构体"><a href="#C结构体" class="headerlink" title="C结构体"></a>C结构体</h1><p>C的结构体用于设计复杂类型。例如：</p><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">person</span> &#123;</span>    <span class="hljs-keyword">char</span> name[<span class="hljs-number">20</span>];    <span class="hljs-keyword">int</span> age;    <span class="hljs-keyword">char</span> gender;    <span class="hljs-keyword">float</span> <span class="hljs-built_in">height</span>;&#125;;</code></pre><p>其中<code>struct person</code>为变量名，而并非<code>person</code>。</p><p><code>.</code>为直接引用符，<code>-&gt;</code>为间接引用符。</p><h1 id="分配空间原则"><a href="#分配空间原则" class="headerlink" title="分配空间原则"></a>分配空间原则</h1><p><strong>默认情况下：</strong></p><ol><li>找对齐标准<br>先找一个占用空间最大的元素。例如在<code>person</code>中，最大的是<code>int</code>或<code>float</code>类型（4字节），4字节就是对其因素，每次开辟4个字节。<code>name</code>是字符串，不考虑。</li><li>给每一个元素开辟空间。<br><code>name</code>占20个字节，开5次，<br><code>gender</code>占1个字节，但也分配4个字节。</li></ol><p><strong>使用宏：</strong></p><p><strong>例：</strong></p><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node1</span> &#123;</span>    <span class="hljs-keyword">char</span> a;    <span class="hljs-keyword">char</span> b;    <span class="hljs-keyword">int</span> c;&#125;;<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">node2</span> &#123;</span>    <span class="hljs-keyword">char</span> a;    <span class="hljs-keyword">int</span> c;    <span class="hljs-keyword">char</span> b;&#125;;</code></pre><p>以4字节为单位，<code>node1</code>先开辟4字节，可以放入<code>a</code>，<code>b</code>，之后再开辟4字节，放入<code>c</code>，总共占用8字节。</p><p>同样以4字节为单位，<code>node2</code>先开辟4字节，仅可放入<code>a</code>，再开辟4字节，放入<code>c</code>，最后还需4字节放入<code>b</code>，总共占用12字节。</p><h1 id="共用体"><a href="#共用体" class="headerlink" title="共用体"></a>共用体</h1><pre><code class="hljs c++"><span class="hljs-keyword">union</span> <span class="hljs-keyword">register</span> &#123;    <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte1;        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte2;        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte3;        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> byte4;    &#125; bytes;    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> number;&#125;</code></pre><p>与结构体不同，共用体占用空间为占用空间最大元素的空间，上述共用体中，共占用4字节。如果改变byte1的内容，则number的内容也会改变。</p><p>例如：</p><pre><code class="hljs c++"><span class="hljs-keyword">union</span> node &#123;    <span class="hljs-keyword">double</span> a;    <span class="hljs-keyword">char</span> b;    <span class="hljs-keyword">int</span> c;&#125;</code></pre><p>占用情况：</p><table><thead><tr><th>a</th><th>b</th><th>c</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td></td><td>1</td></tr><tr><td>2</td><td></td><td>2</td></tr><tr><td>3</td><td></td><td>3</td></tr><tr><td>4</td><td></td><td></td></tr><tr><td>5</td><td></td><td></td></tr><tr><td>6</td><td></td><td></td></tr><tr><td>7</td><td></td><td></td></tr></tbody></table><h1 id="判断大端机、小端机"><a href="#判断大端机、小端机" class="headerlink" title="判断大端机、小端机"></a>判断大端机、小端机</h1><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">is_little</span><span class="hljs-params">()</span> </span>&#123;    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> num = <span class="hljs-number">1</span>;    <span class="hljs-keyword">return</span> ((<span class="hljs-keyword">char</span>*)&amp;num)[<span class="hljs-number">0</span>];&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C</tag>
+      
+      <tag>struct</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ep44</title>
+    <link href="/2020/08/22/ep44-1/"/>
+    <url>/2020/08/22/ep44-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Problem-44"><a href="#Problem-44" class="headerlink" title="Problem 44"></a><a href="https://projecteuler.net/problem=44" target="_blank" rel="noopener">Problem 44</a></h1><hr><p><strong>Pentagon numbers</strong></p><p>Pentagonal numbers are generated by the formula, <code>Pn=n(3n−1)/2</code>. The first ten pentagonal numbers are:</p><p>1, 5, 12, 22, 35, 51, 70, 92, 117, 145, …</p><p>It can be seen that P4 + P7 = 22 + 70 = 92 = P8. However, their difference, 70 − 22 = 48, is not pentagonal.</p><p>Find the pair of pentagonal numbers, <code>Pj</code> and <code>Pk</code>, for which their sum and difference are pentagonal and <code>D = |Pk − Pj|</code> is  minimised; what is the value of D?</p><h1 id="动态枚举上界"><a href="#动态枚举上界" class="headerlink" title="动态枚举上界"></a>动态枚举上界</h1><p>先枚举出五边形数字<br>$$<br>1, 5, 12, 22, 35, 51, 70, 92, 117, 145, …<br>$$<br>双指针从前向后走，如果差值大于D则直接跳过。</p><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cinttypes&gt;</span></span><span class="hljs-function"><span class="hljs-keyword">int64_t</span> <span class="hljs-title">penta</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>&#123;    <span class="hljs-keyword">return</span> n * (<span class="hljs-number">3</span> * n - <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>;&#125;<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bs_penta</span><span class="hljs-params">(<span class="hljs-keyword">int64_t</span> (*func)(<span class="hljs-keyword">int</span>), <span class="hljs-keyword">int64_t</span> n, <span class="hljs-keyword">int64_t</span> x)</span> </span>&#123;    <span class="hljs-keyword">int64_t</span> left = <span class="hljs-number">1</span>, right = n, mid;    <span class="hljs-keyword">while</span> (left &lt;= right) &#123;        mid = (left + right) &gt;&gt; <span class="hljs-number">1</span>;        <span class="hljs-keyword">if</span> (func(mid) == x) &#123;            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;        &#125;        <span class="hljs-keyword">if</span> (func(mid) &lt; x) &#123;            left = mid + <span class="hljs-number">1</span>;        &#125;        <span class="hljs-keyword">else</span> &#123;            right = mid - <span class="hljs-number">1</span>;        &#125;    &#125;    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;    <span class="hljs-keyword">int64_t</span> index = <span class="hljs-number">2</span>, res = INT32_MAX, pi, pj;    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int64_t</span> i = <span class="hljs-number">2</span>; penta(i) - penta(i - <span class="hljs-number">1</span>) &lt; res; i += <span class="hljs-number">1</span>) &#123;        pi = penta(i);        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int64_t</span> j = i - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">1</span>; j -= <span class="hljs-number">1</span>) &#123;            pj = penta(j);            <span class="hljs-keyword">if</span> (pj - pi &gt;= res) &#123;                <span class="hljs-keyword">break</span>;            &#125;            <span class="hljs-keyword">int</span> flag = <span class="hljs-number">1</span>;            flag = bs_penta(penta, <span class="hljs-number">2</span> * i, pi + pj);            flag = flag &amp;&amp; bs_penta(penta, i, pi - pj);            flag &amp;&amp; (res = pi - pj);        &#125;    &#125;    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; res &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>线性筛</title>
+    <link href="/2020/08/18/prime-1/"/>
+    <url>/2020/08/18/prime-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="质数筛缺陷"><a href="#质数筛缺陷" class="headerlink" title="质数筛缺陷"></a>质数筛缺陷</h1><h1 id="线性筛思想"><a href="#线性筛思想" class="headerlink" title="线性筛思想"></a>线性筛思想</h1><p>线性筛的总体思想是用一个整数<code>M</code>去标记合数<code>N</code>，其中<code>N</code>和<code>M</code>具有如下性质</p><ol><li><code>N</code>中最小质数为<code>P</code></li><li><code>N</code>可以表示为<code>P*M</code></li><li><code>P</code>一定小于等于<code>M</code>中最小的因子</li><li>利用<code>M</code>（所有不大于M中最小的质数）去标记<code>P*M</code></li></ol><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 30</span><span class="hljs-keyword">int</span> nums[N + <span class="hljs-number">5</span>];<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt; N; i += <span class="hljs-number">1</span>) &#123;<span class="hljs-keyword">if</span> (!nums[i]) &#123; nums[++nums[<span class="hljs-number">0</span>]] = i; &#125;<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= nums[<span class="hljs-number">0</span>]; j += <span class="hljs-number">1</span>) &#123;<span class="hljs-keyword">if</span> (nums[j] * i &gt;= N) &#123; <span class="hljs-keyword">break</span>; &#125;nums[nums[j] * i] = nums[j];<span class="hljs-keyword">if</span> (i % nums[j] == <span class="hljs-number">0</span>) &#123; <span class="hljs-keyword">break</span>; &#125;&#125;&#125;<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;&#125;</code></pre><h1 id="需要判断质数的情况"><a href="#需要判断质数的情况" class="headerlink" title="需要判断质数的情况"></a>需要判断质数的情况</h1><p>在<code>nums</code>数组中，前<code>nums[0]</code>项已经被用于存放质数，因此我们在需要判断一个数字是否是质数的时候无法通过<code>nums</code>数组判断，因此我们需要另外一个prime数组。</p><pre><code class="hljs c++"><span class="hljs-keyword">int</span> nums[N];<span class="hljs-keyword">int</span> prime[N] = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span> &#125;;<span class="hljs-comment">// 务必将前三项重置为1，1，0</span><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt; N; i += <span class="hljs-number">1</span>) &#123;        <span class="hljs-keyword">if</span> (!nums[i]) &#123; nums[++nums[<span class="hljs-number">0</span>]] = i; &#125;        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= nums[<span class="hljs-number">0</span>] ; j += <span class="hljs-number">1</span>) &#123;            <span class="hljs-keyword">if</span> (nums[j] * i &gt;= N) &#123; <span class="hljs-keyword">break</span>; &#125;            nums[nums[j] * i] = i;            prime[nums[j] * i] = i;            <span class="hljs-keyword">if</span> (i % nums[j] == <span class="hljs-number">0</span>) &#123; <span class="hljs-keyword">break</span>; &#125;        &#125;    &#125;    <span class="hljs-keyword">return</span> ;&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>Primes</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++字符串</title>
+    <link href="/2020/08/18/cpp-string-1/"/>
+    <url>/2020/08/18/cpp-string-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="c-字符串"><a href="#c-字符串" class="headerlink" title="c++字符串"></a>c++字符串</h1><p>头文件：string.h</p><table><thead><tr><th>func</th><th>discription</th></tr></thead><tbody><tr><td>strlen(str)</td><td></td></tr><tr><td>strcmp(str1, str2)</td><td></td></tr><tr><td>strcpy(dest, src)</td><td>src拷贝到dest中</td></tr><tr><td>strncmp(str1, str2, n)</td><td>安全的字符串比较</td></tr><tr><td>strncpy(str1, str2, n)</td><td>安全的字符串拷贝</td></tr><tr><td>memcpy(str1, str2, n)</td><td>内存拷贝</td></tr><tr><td>memcmp(str1, str2, n)</td><td>内存比较</td></tr><tr><td>memset(str1, c, n)</td><td>内存设置</td></tr></tbody></table><p>内存拷贝不需要两个参数类型相同，他会直接复制内存中的数据，其运行速度最快。</p><p><strong>尽量不要使用不安全的拷贝和比较，因为c的字符串拷贝机制是以’\0’为结束的，那么如果src比dest长，那么拷贝将会越界。</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>String</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++宏定义</title>
+    <link href="/2020/08/15/cpp-define-1/"/>
+    <url>/2020/08/15/cpp-define-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="如何使用宏"><a href="#如何使用宏" class="headerlink" title="如何使用宏"></a>如何使用宏</h1><p>所有带“#”的代码都是宏，例如<strong>#include &lt;cstdio&gt;</strong>就是一个宏。</p><p>我们有如下几种定义宏的方法。</p><h2 id="定义符号常量"><a href="#定义符号常量" class="headerlink" title="定义符号常量"></a>定义符号常量</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PI 3.1415926</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_N 10000</span></code></pre><h2 id="定义表达式"><a href="#定义表达式" class="headerlink" title="定义表达式"></a>定义表达式</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX(a, b) (a) &gt; (b) ? (a) : (b)</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> S(a, b) a * b</span></code></pre><h2 id="定义代码段"><a href="#定义代码段" class="headerlink" title="定义代码段"></a>定义代码段</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> P(a) &#123; \</span><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, a); \&#125;</code></pre><h2 id="变参宏"><a href="#变参宏" class="headerlink" title="变参宏"></a>变参宏</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> log(frm, args...) &#123;\</span><span class="hljs-built_in">printf</span>(<span class="hljs-string">"[%s : %d] %s = "</span>, __func__, __LINE__, #args);\<span class="hljs-built_in">printf</span>(frm, ##args);\<span class="hljs-built_in">print</span>(<span class="hljs-string">"\n"</span>);\&#125;</code></pre><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>宏仅作代码替换操作，不做逻辑处理</strong></p><p>例如：</p><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> S(a, b) a * b</span></code></pre><p>如果我们调用：</p><pre><code class="hljs c++">S(<span class="hljs-number">2</span> + <span class="hljs-number">3</span>, <span class="hljs-number">4</span> + <span class="hljs-number">5</span>)</code></pre><p>代码会被替换成：</p><pre><code class="hljs c++"><span class="hljs-number">2</span> + <span class="hljs-number">3</span> * <span class="hljs-number">4</span> + <span class="hljs-number">5</span></code></pre><h2 id="例"><a href="#例" class="headerlink" title="例"></a>例</h2><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DEBUG</span><span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> DEBUG</span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> log(frm, args...) &#123;\</span><span class="hljs-built_in">printf</span>(<span class="hljs-string">"[%s : %d] %s = "</span>, __func__, __LINE__, #args);\<span class="hljs-built_in">printf</span>(frm, ##args);\<span class="hljs-built_in">print</span>(<span class="hljs-string">"\n"</span>);\&#125;<span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> log(frm, args...)</span><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></code></pre><p>这样我们就定义了一个log宏，可以在debug时期打印log，如：</p><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;    <span class="hljs-keyword">int</span> a = <span class="hljs-number">123</span>;    <span class="hljs-built_in">log</span>(<span class="hljs-string">"%d"</span>, a);    <span class="hljs-built_in">log</span>(<span class="hljs-string">"Hello world"</span>);    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre><p>如果我们进行完debug，不想再要打印信息了，只需要将”#define DEBUG”注释掉即可。这样log宏就会展开成空。</p><p>我们可以使用命令添加宏，如：</p><pre><code class="hljs bash">g++ -DDEBUG xxx.cpp// 用于debug，有<span class="hljs-built_in">log</span>信息</code></pre><pre><code class="hljs bash">g++ xxx.cpp // 用于执行，没有<span class="hljs-built_in">log</span>信息</code></pre><h1 id="预定义的宏"><a href="#预定义的宏" class="headerlink" title="预定义的宏"></a>预定义的宏</h1><table><thead><tr><th>说明</th><th>函数</th></tr></thead><tbody><tr><td>__DATE__</td><td>日期：M mm dd yyyy</td></tr><tr><td>__TIME__</td><td>时间：hh:mm:ss</td></tr><tr><td>__LINE__</td><td>行号</td></tr><tr><td>__FILE__</td><td>文件名</td></tr><tr><td>__func__</td><td>函数名/非标准</td></tr><tr><td>__FUNC__</td><td>函数名/非标准</td></tr><tr><td>__PRETTY_FUNCTION__</td><td>更详细的函数信息/非标准</td></tr></tbody></table><h1 id="条件式编译"><a href="#条件式编译" class="headerlink" title="条件式编译"></a>条件式编译</h1><table><thead><tr><th>函数</th><th>说明</th></tr></thead><tbody><tr><td>#ifdef DEBUG</td><td>是否定义了DEBUG</td></tr><tr><td>#idndef DEBUG</td><td>是否没有定义DEBUG</td></tr><tr><td>#if MAX_N == 5</td><td>宏MAX_N是否等于5</td></tr><tr><td>#elif MAX_N == 4</td><td>否则宏MAX_N是否等于4</td></tr><tr><td>#else</td><td></td></tr><tr><td>#endif</td><td></td></tr></tbody></table><h1 id="预处理命令"><a href="#预处理命令" class="headerlink" title="预处理命令"></a>预处理命令</h1><p><img src="C:%5CmyProjects%5CnccBlog%5Csource%5Ccppdefine%5Ccppdefineproc.png" srcset="/img/loading.gif" alt="cppdefineproc"></p><p>宏的处理发生在预处理阶段，在编译阶段之前。</p><p>c++编译器在预处理阶段会把所有的宏替换为代码，例如将”stdio.h”文件内容拷贝进来。</p><p>由于宏的处理发生在预编译阶段，宏的执行速度也是最快的，其处理速度远快于函数。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>二分查找</title>
+    <link href="/2020/08/15/binary-search-1/"/>
+    <url>/2020/08/15/binary-search-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="如何查找元素"><a href="#如何查找元素" class="headerlink" title="如何查找元素"></a>如何查找元素</h1><p>现有一个单调数组，和一个待查找的元素x，如何何种查找法具有最好的时间复杂度。</p><p><img src="C:%5CmyProjects%5CnccBlog%5Csource%5Cbinary-search%5CSnipaste_2020-08-15_09-27-41.png" srcset="/img/loading.gif" alt="Snipaste_2020-08-15_09-27-41"></p><p>最简单，也是最容易想到的方法是一个一个在数组里查找。但如果该数组长度为1亿的话，我们就需要查找1亿次，效率不好。</p><h1 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h1><h1 id="附加1：0，1问题"><a href="#附加1：0，1问题" class="headerlink" title="附加1：0，1问题"></a>附加1：0，1问题</h1><p>假设有如下一个数组：<br>$$<br>0, 0, 0, … , 0, 0, 1, 1, 1, 1, …<br>$$<br>如何找到第一个1？</p><h2 id="二分法"><a href="#二分法" class="headerlink" title="二分法"></a>二分法</h2><p>left <code>&lt;</code> right:</p><p>mid -&gt; 0: left = mid + 1</p><p>mid -&gt; 1: right = <code>mid</code></p><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">bs01</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *arr, <span class="hljs-keyword">int</span> left, <span class="hljs-keyword">int</span> right, <span class="hljs-keyword">int</span> target)</span> </span>&#123;    <span class="hljs-keyword">int</span> mid;    <span class="hljs-keyword">while</span> (left &lt; right) &#123;        mid = (left + right) &gt;&gt; <span class="hljs-number">1</span>;        <span class="hljs-keyword">if</span> (arr[mid] == <span class="hljs-number">1</span>) &#123;            right = mid;        &#125;        <span class="hljs-keyword">else</span> &#123;            left = mid + <span class="hljs-number">1</span>;        &#125;    &#125;        <span class="hljs-keyword">return</span> left;&#125;</code></pre><p><strong>注意处理数组全为0的情况</strong></p><p><strong>以及每次计算mid之后，mid==right的情况，该情况下会发生死循环</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>algorithm</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>algorithm</tag>
+      
+      <tag>array</tag>
+      
+      <tag>search</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>C++数组与指针</title>
+    <link href="/2020/08/13/cpp-pointer-1/"/>
+    <url>/2020/08/13/cpp-pointer-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-中的数组与传参"><a href="#C-中的数组与传参" class="headerlink" title="C++中的数组与传参"></a>C++中的数组与传参</h1><h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p>我们写下如下代码：</p><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;    <span class="hljs-keyword">int</span> arr[<span class="hljs-number">10</span>] = &#123; <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span> &#125;;    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"arr = %p, &amp;arr[0] = %p\n"</span>, arr, &amp;arr[<span class="hljs-number">0</span>]);     <span class="hljs-built_in">printf</span>(<span class="hljs-string">"arr + 1 = %p, &amp;arr[1] = %p, arr + 2 = %p\n"</span>, arr + <span class="hljs-number">1</span>, &amp;arr[<span class="hljs-number">1</span>], arr + <span class="hljs-number">2</span>);    <span class="hljs-keyword">char</span> *p = (<span class="hljs-keyword">char</span> *) arr;    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"p = %p, p + 1 = %p\n"</span>, p, p + <span class="hljs-number">1</span>);        <span class="hljs-keyword">int</span> n = <span class="hljs-number">123</span>;    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"sizeof(n) = %lu\n"</span>, <span class="hljs-keyword">sizeof</span>(n));    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"sizeof(arr) = %lu\n"</span>, <span class="hljs-keyword">sizeof</span>(arr));        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre><p>输出</p><pre><code class="hljs plain">arr &#x3D; 000000A634B3FA68, &amp;arr[0] &#x3D; 000000A634B3FA68arr + 1 &#x3D; 000000A634B3FA6C, &amp;arr[1] &#x3D; 000000A634B3FA6C, arr + 2 &#x3D; 000000A634B3FA70p &#x3D; 000000A634B3FA68, p + 1 &#x3D; 000000A634B3FA69sizeof(n) &#x3D; 4sizeof(arr) &#x3D; 40</code></pre><p>可以看到:</p><ul><li><p>第一行全部为数组首地址的值，</p></li><li><p>第二行分别为arr[1]和arr[2]的地址，我们可以看出[0]，[1]和[2]的地址相差4，即int类型的size。</p></li><li><p>第三行arr + 1和&amp;arr[1]是一样的，这说明arr[1]和*(arr + 1)是等价的，都可以用于访问arr[1]。</p></li></ul><p>因此我们在传参的时候只需要传数组的首地址即可。</p><p>如：</p><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *a)</span> </span>&#123;    <span class="hljs-built_in">print</span>(<span class="hljs-string">"a[0] = %d, a[1] = %d"</span>, a[<span class="hljs-number">0</span>], a[<span class="hljs-number">1</span>]);    ...&#125;</code></pre><h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p>写下如下代码</p><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;    <span class="hljs-keyword">int</span> num[<span class="hljs-number">10</span>][<span class="hljs-number">2</span>];    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"num = %p, num + 1 = %p\n"</span>, num, num + <span class="hljs-number">1</span>);    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre><p>执行结果</p><pre><code class="hljs plain">num &#x3D; 0000008797F9F870, num + 1 &#x3D; 0000008797F9F878</code></pre><p>说明num + 1是num第二行的首地址。</p><p>因此不能使用如下方法传二维数组</p><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> **p)</span> </span>&#123;    ...&#125;</code></pre><p>需要使用</p><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> (*p)[<span class="hljs-number">3</span>])</span> </span>&#123;    ...&#125;</code></pre><h1 id="n维数组"><a href="#n维数组" class="headerlink" title="n维数组"></a>n维数组</h1><p>与二维数组类似</p><pre><code class="hljs plain">int num[20][3][2];</code></pre><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> (*p)[<span class="hljs-number">3</span>][<span class="hljs-number">2</span>])</span> </span>&#123;    ...&#125;</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>array</tag>
+      
+      <tag>pointer</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>course</title>
+    <link href="/2020/08/13/course-1/"/>
+    <url>/2020/08/13/course-1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C-的数组"><a href="#C-的数组" class="headerlink" title="C++的数组"></a>C++的数组</h1><p>数组的初始化</p><p><img src="C:%5CmyProjects%5CnccBlog%5Csource_img%5CSnipaste_2020-08-13_09-22-53.png" srcset="/img/loading.gif" alt="Snipaste_2020-08-13_09-22-53"></p><h1 id="质数筛"><a href="#质数筛" class="headerlink" title="质数筛"></a>质数筛</h1><ol><li>标记一个范围内的数字是否为合数，没有标记则为质数</li><li>空间O(n)，时间O(n*loglogn)</li><li>总体思想是用质数去标记不是质数的数字，如假设i是素数，则标记2*i, 3*i, 4*i, …</li></ol>]]></content>
+    
+    
+    <categories>
+      
+      <category>course</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+      <tag>array</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>TCPIP粘包拆包</title>
+    <link href="/2020/08/11/tcpip-package/"/>
+    <url>/2020/08/11/tcpip-package/</url>
+    
+    <content type="html"><![CDATA[<h1 id="TCP粘包或拆包的原因"><a href="#TCP粘包或拆包的原因" class="headerlink" title="TCP粘包或拆包的原因"></a>TCP粘包或拆包的原因</h1><p>1、要发送的数据大于TCP发送缓冲区剩余空间大小，将会发生拆包。</p><p>2、待发送数据大于MSS（最大报文长度），TCP在传输前将进行拆包。</p><p>3、要发送的数据小于TCP发送缓冲区的大小，TCP将多次写入缓冲区的数据一次发送出去，将会发生粘包。</p><p>4、接收数据端的应用层没有及时读取接收缓冲区中的数据，将发生粘包。</p><h1 id="粘包、拆包解决办法"><a href="#粘包、拆包解决办法" class="headerlink" title="粘包、拆包解决办法"></a>粘包、拆包解决办法</h1><p>1、发送端给每个数据包添加包首部，首部中应该至少包含数据包的长度，这样接收端在接收到数据后，通过读取包首部的长度字段，便知道每一个数据包的实际长度了。</p><p>2、发送端将每个数据包封装为固定长度（不够的可以通过补0填充），这样接收端每次从接收缓冲区中读取固定长度的数据就自然而然的把每个数据包拆分开来。</p><p>3、可以在数据包之间设置边界，如添加特殊符号，这样，接收端通过这个边界就可以将不同的数据包拆分开。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>knowledge</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>TCP/IP</tag>
+      
+      <tag>Web</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>实现c语言中的printf()</title>
     <link href="/2020/08/11/my-printf/"/>
     <url>/2020/08/11/my-printf/</url>
@@ -210,35 +504,6 @@
       <tag>C++</tag>
       
       <tag>Euler project</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>ubuntu-blog</title>
-    <link href="/2020/08/05/ubuntu-blog/"/>
-    <url>/2020/08/05/ubuntu-blog/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    <categories>
-      
-      <category>Dev</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Development</tag>
-      
-      <tag>Linux</tag>
-      
-      <tag>Ubuntu</tag>
       
     </tags>
     

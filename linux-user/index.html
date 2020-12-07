@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Necc Joe">
+  <meta name="keywords" content="">
+  <title>Linux用户管理 - Nestcc Space</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Nest Space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/cover.jfif') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h1 id="重要配置文件"><a href="#重要配置文件" class="headerlink" title="重要配置文件"></a>重要配置文件</h1><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/etc/passwd</td>
+<td>用户，密码位，用户编号，归组编号，姓名，$HOME，$SHELL</td>
+</tr>
+<tr>
+<td>/etc/shadow</td>
+<td>用户，已加密密码，密码改动信息，密码策略</td>
+</tr>
+<tr>
+<td>/etc/group</td>
+<td>群组名，密码位，群组编号，组内用户</td>
+</tr>
+<tr>
+<td>/etc/gshadow</td>
+<td>群组密码相关文件</td>
+</tr>
+<tr>
+<td>/etc/sudoers</td>
+<td>用户名，权限定义，权限(sudo)</td>
+</tr>
+</tbody></table>
+<h1 id="etc-passwd"><a href="#etc-passwd" class="headerlink" title="/etc/passwd"></a>/etc/passwd</h1><pre><code class="hljs plain">root:x:0:0:root:&#x2F;root:.&#x2F;sh
+daemon:x:1:1:daemon:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;sbin&#x2F;nologin
+bin:x:2:2:bin:&#x2F;bin:&#x2F;usr&#x2F;sbin&#x2F;nologin
+sys:x:3:3:sys:&#x2F;dev:&#x2F;usr&#x2F;sbin&#x2F;nologin
+sync:x:4:65534:sync:&#x2F;bin:&#x2F;bin&#x2F;sync</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>root</th>
+<th>x</th>
+<th>0</th>
+<th>0</th>
+<th>root</th>
+<th>/root</th>
+<th>./sh</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>账号名称</td>
+<td>密码</td>
+<td>uid</td>
+<td>gid</td>
+<td>用户信息</td>
+<td>$HOME</td>
+<td>$SHELL</td>
+</tr>
+</tbody></table>
+<h1 id="etc-shadow"><a href="#etc-shadow" class="headerlink" title="/etc/shadow"></a>/etc/shadow</h1><pre><code class="hljs plain">root:$6$YUw2gL...&#x2F;&#x2F;:18472:0:99999:7:::
+daemon:*:18113:0:99999:7:::
+bin:*:18113:0:99999:7:::
+sys:*:18113:0:99999:7:::
+sync:*:18113:0:99999:7:::
+games:*:18113:0:99999:7:::</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>root</th>
+<th>$6…//</th>
+<th>18472</th>
+<th>0</th>
+<th>99999</th>
+<th>7</th>
+<th>null</th>
+<th>null</th>
+<th>Null</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>账户名称</td>
+<td>加密后的密码</td>
+<td>修改密码的日期</td>
+<td>密码不可改动时间</td>
+<td>密码需重新修改时间</td>
+<td>密码变更期限提前警告</td>
+<td>密码过期宽限时间</td>
+<td>账户失效日期</td>
+<td>保留</td>
+</tr>
+</tbody></table>
+<h1 id="etc-group"><a href="#etc-group" class="headerlink" title="/etc/group"></a>/etc/group</h1><pre><code class="hljs plain">root:x:0:
+daemon:x:1:
+bin:x:2:
+sys:x:3:
+adm:x:4:syslog
+tty:x:5:</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>root</th>
+<th>x</th>
+<th>0</th>
+<th>null</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>组名</td>
+<td>密码位</td>
+<td>gid</td>
+<td>组内用户</td>
+</tr>
+</tbody></table>
+<h1 id="etc-gshadow"><a href="#etc-gshadow" class="headerlink" title="/etc/gshadow"></a>/etc/gshadow</h1><pre><code class="hljs plain">root:*::
+daemon:*::
+bin:*::
+sys:*::
+adm:*::syslog</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>root</th>
+<th>*</th>
+<th>null</th>
+<th>Null</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>组名</td>
+<td>密码</td>
+<td>管理员</td>
+<td>组内用户</td>
+</tr>
+</tbody></table>
+<h1 id="chsh-更改用户shell"><a href="#chsh-更改用户shell" class="headerlink" title="chsh 更改用户shell"></a>chsh 更改用户shell</h1><pre><code class="hljs bash">chsh -s Shell &lt;username&gt;</code></pre>
+
+
+
+<h1 id="用户管理相关命令"><a href="#用户管理相关命令" class="headerlink" title="用户管理相关命令"></a>用户管理相关命令</h1><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>su</td>
+<td>切换用户</td>
+<td>sudo</td>
+<td>临时切换root用户</td>
+</tr>
+<tr>
+<td>passwd</td>
+<td>设定用户密码</td>
+<td>gpasswd</td>
+<td>设定群组密码</td>
+</tr>
+<tr>
+<td>chsh</td>
+<td>切换shell</td>
+<td>usermod</td>
+<td>修改用户账号</td>
+</tr>
+<tr>
+<td>useradd</td>
+<td>新建用户</td>
+<td>userdel</td>
+<td>删除用户</td>
+</tr>
+<tr>
+<td>Id</td>
+<td>显示用户信息</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody></table>
+<h1 id="su-切换用户"><a href="#su-切换用户" class="headerlink" title="su 切换用户"></a>su 切换用户</h1><pre><code class="hljs shell">su [-lmpfc] &lt;username&gt;</code></pre>
+
+<ul>
+<li>- | -l : 重新登陆</li>
+<li>-m | -p : 不更改环境变量</li>
+<li>-c command : 切换后执行命令，并退出</li>
+</ul>
+<h1 id="sudo-临时切换到root"><a href="#sudo-临时切换到root" class="headerlink" title="sudo 临时切换到root"></a>sudo 临时切换到root</h1><pre><code class="hljs shell">sudo [-siul] &lt;command&gt;</code></pre>
+
+<ul>
+<li>-s : 切换为root shell</li>
+<li>-i : 切换到root shell，并初始化</li>
+<li>-u username | did : 执行命令的身份</li>
+<li>-l : 显示自己的权限</li>
+</ul>
+<h1 id="passwd-设定用户密码"><a href="#passwd-设定用户密码" class="headerlink" title="passwd 设定用户密码"></a>passwd 设定用户密码</h1><pre><code class="hljs shell">passwd [-dleSxnf] &lt;username&gt;</code></pre>
+
+<ul>
+<li>-d : 清除密码</li>
+<li>-l : 锁定账户</li>
+<li>-e : 使密码过期</li>
+<li>-S : 显示密码认证信息</li>
+<li>-x days : 密码修改后最大使用天数</li>
+<li>-n days : 密码修改间隔时间</li>
+<li>-f : 更改用户信息</li>
+<li>-i : 密码过期后宽限时间</li>
+</ul>
+<h1 id="gpasswd-设置组群及组群密码"><a href="#gpasswd-设置组群及组群密码" class="headerlink" title="gpasswd 设置组群及组群密码"></a>gpasswd 设置组群及组群密码</h1><pre><code class="hljs shell">gpassed [-adrAM] &lt;groupname&gt;</code></pre>
+
+<ul>
+<li>-a username : 将用户加入组群</li>
+<li>-d username : 将用户从组群中移除</li>
+<li>-r : 删除密码</li>
+<li>-A username : 将用户设置为组群管理员</li>
+<li>-M username1, username2, … : 设置组群成员</li>
+</ul>
+<h1 id="useradd-添加用户"><a href="#useradd-添加用户" class="headerlink" title="useradd 添加用户"></a>useradd 添加用户</h1><pre><code class="hljs shell">useradd [-dmMsugGnefcD] &lt;username&gt;</code></pre>
+
+<ul>
+<li>-d dir : 指定$HOME</li>
+<li>-m : 自动建立$HOME</li>
+<li>-M : 不自动建立$HOME</li>
+<li>-s shell : 设置用户登陆shell</li>
+<li>-u uid : 设置用户id</li>
+<li>-g groupname : 设置用户归属组群</li>
+<li>-G groupname : 设置用户归属附加组群</li>
+<li>-n : 不建立以用户名为组群名称的组群</li>
+<li>-e days : 设置账号过期时间，绝对时间</li>
+<li>-f days : 缓冲时间，days天后关闭账号</li>
+<li>-c string : 设置用户备注</li>
+<li>-D [exp] : 更改预设值</li>
+</ul>
+<p>/etc/login.defs 新建用户规则</p>
+<p>/etc/skel 新建用户默认文件</p>
+<h1 id="userdel-删除用户"><a href="#userdel-删除用户" class="headerlink" title="userdel 删除用户"></a>userdel 删除用户</h1><pre><code class="hljs shell">userdel -r &lt;username&gt;</code></pre>
+
+<ul>
+<li>-r : 删除用户相关文件和目录（邮件，家目录）</li>
+</ul>
+<h1 id="usermod-命令"><a href="#usermod-命令" class="headerlink" title="usermod 命令"></a>usermod 命令</h1><pre><code class="hljs shell">usermod [-cdefgGlLsuU] &lt;username&gt;</code></pre>
+
+<ul>
+<li>-l username : 修改用户账号名称</li>
+<li>-L : 锁定用户密码，使密码无效</li>
+<li>-s shell : 修改用户登陆后所使用的shell</li>
+<li>-u did : 修改用户uid</li>
+<li>-U : 解除密码锁定 </li>
+</ul>
+<h1 id="Id-命令"><a href="#Id-命令" class="headerlink" title="Id 命令"></a>Id 命令</h1><pre><code class="hljs shell">id [-gGnru] &lt;username&gt;</code></pre>
+
+<ul>
+<li>-g : 下属所属组ID</li>
+<li>-G : 显示附加组ID</li>
+<li>-n : 显示用户，所属组码，或附加群组的名称</li>
+<li>-u : 显示用户ID</li>
+<li>-r : 显示实际ID</li>
+</ul>
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Linux用户管理&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
