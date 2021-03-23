@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Nestor Zhao">
+  <meta name="keywords" content="">
+  <title>day 2 - Nestcc Space</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Nest Space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/cover.jfif') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h1 id="UTF-8编码规则"><a href="#UTF-8编码规则" class="headerlink" title="UTF-8编码规则"></a>UTF-8编码规则</h1><p>UTF-8是一种变长编码，它可以使用1～4个字节表示一个符号，根据不同的符号而变化字节长度。其编码规则有两条：</p>
+<ol>
+<li>对于单字节的符号，字节第<code>1</code>位为<code>0</code>，后面<code>7</code>位为这个字符的unicode码。因此对于英文字母来说，UTF-8编码和ACSII码是相同的。</li>
+<li>对于<code>n</code>字节的符号（n&gt;1)，第一字节的前<code>n</code>位都为1，第<code>n+1</code> 位为0，之后字节的前<code>2</code>位为<code>10</code>。剩下的没有提及的二进制位全部为这个符号的unicode码。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Unicode 符号范围（十六进制）</th>
+<th>UTF-8编码方式（二进制）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0000 0000 - 0000 007F</td>
+<td>0xxx xxxx</td>
+</tr>
+<tr>
+<td>0000 0080 - 0000 07FF</td>
+<td>110x xxxx 10xx xxxx</td>
+</tr>
+<tr>
+<td>0000 0800 - 0000 FFFF</td>
+<td>1110 xxxx 10xx xxxx 10xx xxxx</td>
+</tr>
+<tr>
+<td>0001 0000 - 0010 FFFF</td>
+<td>1111 0xxx 10xx xxxx 10xx xxxx 10xx xxxx</td>
+</tr>
+</tbody></table>
+<h1 id="unicode-h"><a href="#unicode-h" class="headerlink" title="unicode.h"></a>unicode.h</h1><blockquote>
+<p>  实现unicode的编码和解码功能</p>
+</blockquote>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> _UNICODE_H_</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _UNICODE_H_</span>
+
+<span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">get_number_encode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">get_number_decode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">uint8_t</span> <span class="hljs-keyword">byte</span>)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">encode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">uint8_t</span> *buff, <span class="hljs-keyword">int</span> value)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">decode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">uint8_t</span> *byte_ptr, <span class="hljs-keyword">size_t</span> length)</span></span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></code></pre>
+
+
+
+<h1 id="unicode-cpp"><a href="#unicode-cpp" class="headerlink" title="unicode.cpp"></a>unicode.cpp</h1><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cinttypes&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"common.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"unicode.h"</span></span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">get_number_encode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">int</span> value)</span> </span>&#123;
+    ASSERT(value &gt; <span class="hljs-number">0</span>, <span class="hljs-string">"Can`t encode negative value!"</span>);
+
+    <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0x7f</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    &#125;
+
+    <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0x7ff</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    &#125;
+
+    <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0xffff</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+    &#125;
+
+    <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0x10ffff</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+    &#125; 
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">uint8_t</span> <span class="hljs-title">encode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">uint8_t</span> *buff, <span class="hljs-keyword">int</span> value)</span> </span>&#123;
+    ASSERT(value &gt; <span class="hljs-number">0</span>, <span class="hljs-string">"Can`t encode negative value!"</span>);
+
+    <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0x7f</span>) &#123;
+        *buff = value &amp; <span class="hljs-number">0x7f</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0x7ff</span>) &#123;
+        *buff ++ = <span class="hljs-number">0xc0</span> | ((value &amp; <span class="hljs-number">0x7c0</span>) &gt;&gt; <span class="hljs-number">6</span>);
+        *buff = <span class="hljs-number">0x80</span> | (value &amp; <span class="hljs-number">0x3f</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0xffff</span>) &#123;
+        *buff ++ = <span class="hljs-number">0xe0</span> | ((value &amp; <span class="hljs-number">0xf000</span>) &gt;&gt; <span class="hljs-number">12</span>);
+        *buff ++ = <span class="hljs-number">0x80</span> | ((value &amp; <span class="hljs-number">0xfc0</span>) &gt;&gt; <span class="hljs-number">6</span>);
+        *buff = <span class="hljs-number">0x80</span> | (value &amp; <span class="hljs-number">0x3f</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (value &lt;= <span class="hljs-number">0x10ffff</span>) &#123;
+        *buff ++ = <span class="hljs-number">0xf0</span> | ((value &amp; <span class="hljs-number">0x1c0000</span>) &gt;&gt; <span class="hljs-number">18</span>);
+        *buff ++ = <span class="hljs-number">0x80</span> | ((value &amp; <span class="hljs-number">0x3f000</span>) &gt;&gt; <span class="hljs-number">12</span>);
+        *buff ++ = <span class="hljs-number">0x80</span> | ((value &amp; <span class="hljs-number">0xfc0</span>) &gt;&gt; <span class="hljs-number">6</span>);
+        *buff = <span class="hljs-number">0x80</span> | (value &amp; <span class="hljs-number">0x3f</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+    &#125;
+
+    NOT_REACHED();
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">get_number_decode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">uint8_t</span> <span class="hljs-keyword">byte</span>)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">byte</span> &amp; <span class="hljs-number">0xc0</span>) == <span class="hljs-number">0x80</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    &#125;
+
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">byte</span> &amp; <span class="hljs-number">0xf8</span>) == <span class="hljs-number">0xf0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">4</span>;
+    &#125;
+
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">byte</span> &amp; <span class="hljs-number">0xf0</span>) == <span class="hljs-number">0xe0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">3</span>;
+    &#125;
+
+    <span class="hljs-keyword">if</span> ((<span class="hljs-keyword">byte</span> &amp; <span class="hljs-number">0xe0</span>) == <span class="hljs-number">0xc0</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;
+    &#125;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;   <span class="hljs-comment">//ascii码</span>
+&#125; 
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">decode_utf8</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">uint8_t</span> *byte_ptr, <span class="hljs-keyword">size_t</span> length)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (*byte_ptr &lt;= <span class="hljs-number">0x7f</span>) &#123;
+        <span class="hljs-keyword">return</span> *byte_ptr;
+    &#125;
+
+    <span class="hljs-keyword">int</span> value;
+    <span class="hljs-keyword">uint32_t</span> remainingBytes;
+
+    <span class="hljs-keyword">if</span> ((*byte_ptr &amp; <span class="hljs-number">0xe0</span>) == <span class="hljs-number">0xc0</span>) &#123;
+        value = *byte_ptr &amp; <span class="hljs-number">0x1f</span>; 
+        remainingBytes = <span class="hljs-number">1</span>;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((*byte_ptr &amp; <span class="hljs-number">0xf0</span>) == <span class="hljs-number">0xe0</span>) &#123;
+        value = *byte_ptr &amp; <span class="hljs-number">0x0f</span>; 
+        remainingBytes = <span class="hljs-number">2</span>;
+    &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((*byte_ptr &amp; <span class="hljs-number">0xf8</span>) == <span class="hljs-number">0xf0</span>) &#123;
+        value = *byte_ptr &amp; <span class="hljs-number">0x07</span>; 
+        remainingBytes = <span class="hljs-number">3</span>;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;  
+    &#125;
+
+    <span class="hljs-keyword">if</span> (remainingBytes &gt; length - <span class="hljs-number">1</span>) &#123;
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    &#125;
+
+    <span class="hljs-keyword">while</span> (remainingBytes &gt; <span class="hljs-number">0</span>) &#123;
+        byte_ptr++;  
+        remainingBytes--;
+        <span class="hljs-keyword">if</span> ((*byte_ptr &amp; <span class="hljs-number">0xc0</span>) != <span class="hljs-number">0x80</span>) &#123;
+	        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+        &#125;
+        value = value &lt;&lt; <span class="hljs-number">6</span> | (*byte_ptr &amp; <span class="hljs-number">0x3f</span>);
+    &#125;
+    <span class="hljs-keyword">return</span> value;
+&#125;</code></pre>
+
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "day 2&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

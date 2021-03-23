@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Nestor Zhao">
+  <meta name="keywords" content="">
+  <title>第一天 - Nestcc Space</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Nest Space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/cover.jfif') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h1 id="common-h"><a href="#common-h" class="headerlink" title="common.h"></a>common.h</h1><blockquote>
+<p>  各模块中通用的宏。</p>
+</blockquote>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NOCOLOR     <span class="hljs-meta-string">"\e[0m"</span>         <span class="hljs-comment">//清除颜色，即之后的打印为正常输出，之前的不受影响</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BLACK       <span class="hljs-meta-string">"\e[0;30m"</span>      <span class="hljs-comment">//深黑</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> L_BLACK     <span class="hljs-meta-string">"\e[1;30m"</span>      <span class="hljs-comment">//亮黑，偏灰褐</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RED         <span class="hljs-meta-string">"\e[0;31m"</span>      <span class="hljs-comment">//深红，暗红</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> L_RED       <span class="hljs-meta-string">"\e[1;31m"</span>      <span class="hljs-comment">//鲜红</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> GREEN       <span class="hljs-meta-string">"\e[0;32m"</span>      <span class="hljs-comment">//深绿，暗绿</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> L_GREEN     <span class="hljs-meta-string">"\e[1;32m"</span>      <span class="hljs-comment">//鲜绿</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BROWN       <span class="hljs-meta-string">"\e[0;33m"</span>      <span class="hljs-comment">//深黄，暗黄</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> YELLOW      <span class="hljs-meta-string">"\e[1;33m"</span>      <span class="hljs-comment">//鲜黄</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BLUE        <span class="hljs-meta-string">"\e[0;34m"</span>      <span class="hljs-comment">//深蓝，暗蓝</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> L_BLUE      <span class="hljs-meta-string">"\e[1;34m"</span>      <span class="hljs-comment">//亮蓝，偏白灰</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> PINK        <span class="hljs-meta-string">"\e[0;35m"</span>      <span class="hljs-comment">//深粉，暗粉，偏暗紫</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> L_PINK      <span class="hljs-meta-string">"\e[1;35m"</span>      <span class="hljs-comment">//亮粉，偏白灰</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> CYAN        <span class="hljs-meta-string">"\e[0;36m"</span>      <span class="hljs-comment">//暗青色</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> L_CYAN      <span class="hljs-meta-string">"\e[1;36m"</span>      <span class="hljs-comment">//鲜亮青色</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> GRAY        <span class="hljs-meta-string">"\e[0;37m"</span>      <span class="hljs-comment">//灰色</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WHITE       <span class="hljs-meta-string">"\e[1;37m"</span>      <span class="hljs-comment">//白色，字体粗一点，比正常大，比bold小</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BOLD        <span class="hljs-meta-string">"\e[1m"</span>         <span class="hljs-comment">//白色，粗体</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> UNDERLINE   <span class="hljs-meta-string">"\e[4m"</span>         <span class="hljs-comment">//下划线，白色，正常大小</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BLINK       <span class="hljs-meta-string">"\e[5m"</span>         <span class="hljs-comment">//闪烁，白色，正常大小</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> REVERSE     <span class="hljs-meta-string">"\e[7m"</span>         <span class="hljs-comment">//反转，即字体背景为白色，字体为黑色</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> HIDE        <span class="hljs-meta-string">"\e[8m"</span>         <span class="hljs-comment">//隐藏</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> CLEAR       <span class="hljs-meta-string">"\e[2J"</span>         <span class="hljs-comment">//清除</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> CLRLINE     <span class="hljs-meta-string">"\r\e[K"</span>        <span class="hljs-comment">//清除行</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdint.h&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">VM</span> <span class="hljs-title">VM</span>;</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">PARSER</span> <span class="hljs-title">Parser</span>;</span>
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> _<span class="hljs-title">CLASS</span> <span class="hljs-title">Class</span>;</span>
+
+<span class="hljs-comment">// #define bool char</span>
+<span class="hljs-comment">// #define True 1</span>
+<span class="hljs-comment">// #define False 0</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> UNUSED __attribute__((unused))</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> DEBUG</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ASSERT(condition, errmsg)    \</span>
+<span class="hljs-keyword">do</span> &#123;    \
+    <span class="hljs-keyword">if</span> (!condition) &#123;   \
+        <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, RED <span class="hljs-string">"An error occured!\n"</span> NOCOLOR <span class="hljs-string">"%s at : %s,%d:%s()\n"</span>,   \
+            errmsg, __FILE__, __LINE__, __func__);  \
+        <span class="hljs-built_in">abort</span>();    \
+    &#125;   \
+&#125; <span class="hljs-keyword">while</span> (<span class="hljs-number">0</span>);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">else</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ASSERT(condition, errmsg)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NOT_REACHED()   \</span>
+<span class="hljs-keyword">do</span> &#123;    \
+    <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, BROWN <span class="hljs-string">"Not reached:\n"</span> NOCOLOR <span class="hljs-string">"%s,%d:%s()\n"</span>,   \
+        __FILE__, __LINE__, __func__);  \
+&#125; <span class="hljs-keyword">while</span> (<span class="hljs-number">0</span>);</code></pre>
+
+
+
+<ol>
+<li>VM,Parser,Class宏将在后面实现。</li>
+<li>消除编译器对函数内未使用的形参的警报，使用UNUSED宏。</li>
+<li>ASSERT实现调试断点。</li>
+<li>如果一些分支是不可到达而实际运行时到达了的，说明该段程序出错，将UN_REACHED宏安插到代码中以检测错误。</li>
+</ol>
+<h1 id="utils-h"><a href="#utils-h" class="headerlink" title="utils.h"></a>utils.h</h1><blockquote>
+<p>  用于实现内存管理功能</p>
+</blockquote>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"common.h"</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">mem_manager</span><span class="hljs-params">(VM *vm, <span class="hljs-keyword">void</span> *ptr, <span class="hljs-keyword">uint32_t</span> old_size, <span class="hljs-keyword">uint32_t</span> new_size)</span></span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ALLOCATE(vm_ptr, type) \</span>
+(type *) men_manager(vm_ptr, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(type));
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ALLOCATE_EXTRA(vm_ptr, type, extra_size) \</span>
+(type *) mem_manager(vm_ptr, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(type) + extra_size);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ALLOCATE_ARRAY(vm_ptr, type, capacity) \</span>
+(type *) mem_manager(vm_ptr, <span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(typr) * capacity);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DESTORY_ARRAY(vm_ptr, arr_ptr, capacity) \</span>
+mem_manager(vm_ptr, arr_ptr, <span class="hljs-keyword">sizeof</span>(arr_ptr[<span class="hljs-number">0</span>]) * capacity, <span class="hljs-number">0</span>);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DESTORY(vm_ptr, mem_ptr) \</span>
+mem_manager(vm_ptr, mem_ptr, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">ceil_to_squar</span><span class="hljs-params">(<span class="hljs-keyword">uint32_t</span> v)</span></span>;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">STRING</span> &#123;</span>
+    <span class="hljs-keyword">uint32_t</span> length;
+    <span class="hljs-keyword">char</span> *str;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CharVal</span> &#123;</span>
+    <span class="hljs-keyword">uint32_t</span> length;
+    <span class="hljs-keyword">char</span> str[<span class="hljs-number">0</span>];
+&#125;;
+
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Type&gt;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MemBuffer</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    Type *data;
+    
+    <span class="hljs-keyword">uint32_t</span> count;
+
+    <span class="hljs-keyword">uint32_t</span> capacity;
+    
+    MemBuffer() : data(<span class="hljs-literal">nullptr</span>), count(<span class="hljs-number">0</span>) &#123;&#125; ;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fillWirte</span><span class="hljs-params">(VM *vm, Type &amp;data, <span class="hljs-keyword">uint32_t</span> fill_cnt)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buffAdd</span><span class="hljs-params">(VM *vm, Type &amp;data)</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">buffClear</span><span class="hljs-params">(VM *vm)</span></span>;
+
+&#125;;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> SymbolTable MemBuffer<span class="hljs-meta-string">&lt;STRING&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">uint8_t</span> Byte;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">char</span> Char;
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> Int;
+
+<span class="hljs-keyword">enum</span> ErrType &#123;
+    ERROR_IO,
+    ERROR_MEM,
+    ERROR_LEX,
+    ERROR_COMPILE,
+    ERROR_RUNTIME,
+&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">symbol_table_clear</span><span class="hljs-params">(VM *vm, SymbolTable *<span class="hljs-built_in">buffer</span>)</span></span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">report_error</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *parser, ErrType err_type, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *fmt, ...)</span></span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> IO_ERROR(...) \</span>
+report_error(<span class="hljs-literal">NULL</span>, ErrType::ERROR_IO, __VA_ARGS__);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MEM_ERROR(...) \</span>
+report_error(<span class="hljs-literal">NULL</span>, ErrType::ERROR_MEM, __VA_ARGS__);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> LEX_ERROR(parser, ...) \</span>
+report_error(parser, ErrType::ERROR_LEX, __VA_ARGS__);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> COMPILE_ERROR(parser, ...) \</span>
+report_error(parser, ErrType::ERROR_COMPILE, __VA_ARGS__);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RUNTIME_ERROR(parser, ...) \</span>
+report_error(parser, ErrType::ERROR_RUNTIME, __VA_ARGS__);
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> DEFAULT_BUfFER_SIZE 512</span></code></pre>
+
+
+
+<h2 id="mem-manager"><a href="#mem-manager" class="headerlink" title="mem_manager"></a>mem_manager</h2><p>用于内存管理，负责开辟和释放内存。</p>
+<p>接下来的5个宏为基于<code>mem_manager</code> 实现的内存管理宏。</p>
+<ul>
+<li>ALLOCATE</li>
+<li>ALLOCATE_EXTRA</li>
+<li>ALLOCATE_ARRAY</li>
+<li>DESTORY_ARRAY</li>
+<li>DESTORY</li>
+</ul>
+<h2 id="STRING-CharVal"><a href="#STRING-CharVal" class="headerlink" title="STRING CharVal"></a>STRING CharVal</h2><p>两种数据类型。</p>
+<p><code>STRING</code>用于存储字符串，这是为后面定义的<code>String</code>类型缓冲区做准备。</p>
+<p><code>CharVal</code>用于存储字符串对象中的字符串，由于字符串对象长度不确定，因此<code>char str[]</code>长度为0，类似于c99中的柔性数组。</p>
+<h2 id="MemBuffer"><a href="#MemBuffer" class="headerlink" title="MemBuffer"></a>MemBuffer</h2><p>各种数据类型缓冲区的模版类，相当于简版的STL空间适配器。</p>
+<h3 id="成员变量"><a href="#成员变量" class="headerlink" title="成员变量"></a>成员变量</h3><ol>
+<li>Type *data：一个Type类型的数组。</li>
+<li>uint32_t count：已经使用元素的个数。</li>
+<li>uint32_t capacity：缓冲区总共可存放的元素个数。</li>
+</ol>
+<h3 id="成员函数"><a href="#成员函数" class="headerlink" title="成员函数"></a>成员函数</h3><ul>
+<li><p>void fillWirte(VM *vm, Type &amp;data, uint32_t fill_cnt)</p>
+<p>向数组中连续存入<code>fill_cnt</code>个<code>data</code>元素，如果空间不够则扩容。每次扩容操作使得原数组容量变为原来的2倍。</p>
+</li>
+<li><p>void buffAdd(VM *vm, Type &amp;data)</p>
+<p>存入一个<code>data</code></p>
+</li>
+<li><p>void buffClear(VM *vm)</p>
+<p>清空缓冲区</p>
+</li>
+</ul>
+<h2 id="错误类型"><a href="#错误类型" class="headerlink" title="错误类型"></a>错误类型</h2><p>ErrType声明错误类型，用于不同类型的报错。之后是相关的宏定义，都是调用report_error()完成的。</p>
+<h1 id="utilis-cpp"><a href="#utilis-cpp" class="headerlink" title="utilis.cpp"></a>utilis.cpp</h1><blockquote>
+<p>  实现相关函数</p>
+</blockquote>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"includes/utils_cpp.h"</span></span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">uint32_t</span> <span class="hljs-title">ceil_to_squar</span><span class="hljs-params">(<span class="hljs-keyword">uint32_t</span> v)</span> </span>&#123;
+   v += (v == <span class="hljs-number">0</span>);  
+   v--;
+   v |= v &gt;&gt; <span class="hljs-number">1</span>;
+   v |= v &gt;&gt; <span class="hljs-number">2</span>;
+   v |= v &gt;&gt; <span class="hljs-number">4</span>;
+   v |= v &gt;&gt; <span class="hljs-number">8</span>;
+   v |= v &gt;&gt; <span class="hljs-number">16</span>;
+   v++;
+   <span class="hljs-keyword">return</span> v;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">mem_manager</span><span class="hljs-params">(VM *vm, <span class="hljs-keyword">void</span> *data, <span class="hljs-keyword">uint32_t</span> old_size, <span class="hljs-keyword">uint32_t</span> new_size)</span> </span>&#123;
+    
+    <span class="hljs-comment">// vm -&gt; allocatedBytes += new_size - old_size;</span>
+
+    <span class="hljs-keyword">if</span> (new_size == <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-built_in">free</span>(data);
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;
+    &#125;
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">realloc</span>(data, new_size);
+&#125;</code></pre>
+
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "第一天&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Nestor Zhao">
+  <meta name="keywords" content="">
+  <title>疑难杂项 - Nestcc Space</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Nest Space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/cover.jfif') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <h1 id="auto"><a href="#auto" class="headerlink" title="auto"></a>auto</h1><blockquote>
+<p>  c99关键字</p>
+</blockquote>
+<h2 id="C-–-是一个声明"><a href="#C-–-是一个声明" class="headerlink" title="C – 是一个声明"></a>C – 是一个声明</h2><p>C语言中的<code>auto</code>关键字用来声明局部自动变量，与局部变量没有什么区别。</p>
+<h2 id="C-11-–-声明变量"><a href="#C-11-–-声明变量" class="headerlink" title="C++11 – 声明变量"></a>C++11 – 声明变量</h2><p>例：使用STL中的map容器时</p>
+<pre><code class="hljs c++"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; arr;</code></pre>
+
+<p>2种遍历方式：</p>
+<p>1 使用迭代器</p>
+<pre><code class="hljs c++"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt;::iterator it;
+<span class="hljs-keyword">for</span> (it = arr.<span class="hljs-built_in">begin</span>(); it != arr.<span class="hljs-built_in">end</span>(); it ++) &#123;
+  ...
+&#125;</code></pre>
+
+<p>2 使用auto变量</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">auto</span> it = arr.<span class="hljs-built_in">begin</span>();
+<span class="hljs-keyword">for</span>(...) &#123;
+  ...
+&#125;</code></pre>
+
+<p>如上代码中的<code>auto</code>关键字会让编译器自动推导it的类型，即为<code>arr.begin()</code>的返回值类型</p>
+<h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ol>
+<li><p>不能作为函数参数，可以作为模版函数参数（c++14、17）。会影响函数的调用绑定。</p>
+</li>
+<li><p>不能作为模版参数（c++11）。</p>
+</li>
+<li><p>不能定义数组。</p>
+</li>
+<li><p>不能用于非静态成员变量。</p>
+<p>可以：</p>
+<pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Base</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+  <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> x;
+&#125;;
+
+<span class="hljs-keyword">auto</span> Base::x = <span class="hljs-number">0</span>;</code></pre>
+
+
+
+</li>
+</ol>
+<h1 id="const-和-constexpr"><a href="#const-和-constexpr" class="headerlink" title="const 和 constexpr"></a>const 和 constexpr</h1><p>如何改变<code>const</code>常量：</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>;
+*(<span class="hljs-keyword">const_cast</span>&lt;<span class="hljs-keyword">int</span> *&gt; (&amp;x)) = <span class="hljs-number">123</span>;
+*(&amp;x) <span class="hljs-comment">// 123</span></code></pre>
+
+<p>区别：</p>
+<ol>
+<li><code>const</code>是运行期常量，而<code>constexpr</code>是编译期常量。</li>
+<li><code>constexpr</code>变量只可以通过<code>constexpr</code>函数初始化。</li>
+<li></li>
+</ol>
+<pre><code class="hljs c++"><span class="hljs-keyword">int</span> n;
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cin</span> &gt;&gt; n;
+<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> x = n + <span class="hljs-number">1</span>; <span class="hljs-comment">// 在运行期确定值，可以通过编译</span>
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">int</span> a = <span class="hljs-number">123</span>; <span class="hljs-comment">// 在编译期确定值，可以通过编译</span>
+<span class="hljs-keyword">constexpr</span> <span class="hljs-keyword">int</span> y = n + <span class="hljs-number">2</span>; <span class="hljs-comment">// 出错，因为编译期无法确定变量的值</span></code></pre>
+
+
+
+<h1 id="NULL和nullptr"><a href="#NULL和nullptr" class="headerlink" title="NULL和nullptr"></a>NULL和nullptr</h1><pre><code class="hljs c++"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-literal">NULL</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-literal">nullptr</span> &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>; <span class="hljs-comment">// nullptr</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span> </span>&#123;
+  ...
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *x)</span> </span>&#123;
+  ...
+&#125;
+
+func(<span class="hljs-literal">nullptr</span>); <span class="hljs-comment">// 调用第二个重载</span>
+func(<span class="hljs-literal">NULL</span>); <span class="hljs-comment">// 无法通过编译</span></code></pre>
+
+<ol>
+<li><code>NULL</code>是一个宏，展开后为<code>0x0</code>。</li>
+<li><code>nullptr</code>是一个地址，值为<code>0x0</code>。</li>
+</ol>
+<h1 id="左值、右值"><a href="#左值、右值" class="headerlink" title="左值、右值"></a>左值、右值</h1><p>判断方式：到了代码下一行时，能否使用单一变量访问到这个值 ? 能 -&gt; 左值 : 不能 -&gt; 右值。</p>
+<p>右值存储在临时变量中。</p>
+<h2 id="完美转发"><a href="#完美转发" class="headerlink" title="完美转发"></a>完美转发</h2><ol>
+<li>std::move()可以强制将左值转成右值特性。</li>
+<li>std::forward&lt;typename &amp;&amp;T&gt;()可以强制转化成右值引用。</li>
+</ol>
+<p><code>move</code>和<code>forward</code>可以保证正确地传递左值和右值。</p>
+<pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;x)</span> </span>&#123;
+  	...
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">int</span> &amp;&amp;x)</span> </span>&#123;
+  	...
+&#125;
+
+func(<span class="hljs-built_in">move</span>(x));</code></pre>
+
+
+
+<h2 id="移动构造"><a href="#移动构造" class="headerlink" title="移动构造"></a>移动构造</h2><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">vector</span> &#123;</span>
+  	...
+    <span class="hljs-built_in">vector</span>(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span> &amp;&amp;v) &#123;
+      	...
+        v.data = <span class="hljs-literal">nullptr</span>;
+      	v.__size = <span class="hljs-number">0</span>;			<span class="hljs-comment">// 需要将v中的指针指向其他地方，变量清空。   </span>
+    &#125;; <span class="hljs-comment">// 传右值引用的函数，移动构造。</span>
+&#125;</code></pre>
+
+
+
+<h2 id="函数绑定顺序"><a href="#函数绑定顺序" class="headerlink" title="函数绑定顺序"></a>函数绑定顺序</h2><ol>
+<li>左值绑左值引用</li>
+<li>右值绑右值引用</li>
+<li>const Type &amp;可以绑定一切</li>
+</ol>
+<h1 id="引用折叠"><a href="#引用折叠" class="headerlink" title="引用折叠"></a>引用折叠</h1><h1 id="模版特化、偏特化"><a href="#模版特化、偏特化" class="headerlink" title="模版特化、偏特化"></a>模版特化、偏特化</h1><p>如下函数模版</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> C1, <span class="hljs-keyword">typename</span> C2&gt;
+auto add(C1 *a, C2 *b) -&gt; decltype(add(*a, *b)) &#123;
+    <span class="hljs-keyword">return</span> *a + *b;
+&#125;</code></pre>
+
+<p>特化：</p>
+<pre><code class="hljs c++"><span class="hljs-keyword">template</span>&lt;&gt;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;
+    <span class="hljs-keyword">return</span> a + b;
+&#125;</code></pre>
+
+<p>特化后类型完全确定，模版再无拓展空间。</p>
+<h1 id="变参模版"><a href="#变参模版" class="headerlink" title="变参模版"></a>变参模版</h1>
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "疑难杂项&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

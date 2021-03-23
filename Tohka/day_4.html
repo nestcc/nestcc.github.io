@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Nestor Zhao">
+  <meta name="keywords" content="">
+  <title>自制编程语言--Tohka - Nestcc Space</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+<link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_fmb4a04yx8h.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_pjno9b9zyxs.css">
+
+
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Nest Space</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="iconfont icon-home-fill"></i>
+              首页</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">
+              <i class="iconfont icon-archive-fill"></i>
+              归档</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">
+              <i class="iconfont icon-category-fill"></i>
+              分类</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">
+              <i class="iconfont icon-tags-fill"></i>
+              标签</a>
+          </li>
+        
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">
+              <i class="iconfont icon-user-fill"></i>
+              关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('/img/cover.jfif') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="page-content">
+  <blockquote>
+<p>  主要实现词法分析器parser</p>
+</blockquote>
+<h1 id="lex和token"><a href="#lex和token" class="headerlink" title="lex和token"></a>lex和token</h1><p>lex，即lexeme的缩写，意为词汇、单词，其本身意为着字符串本身。例如字符串”import”就是一个lex。lex是词法分析器的输入，即词法分析器需要直接识别的原始材料。</p>
+<p>token，是符号、象征的意思。它不是最直观的字面量。token是词法分析器的输出，即分析器读取了lex后的产出物。词法分析器所产出的东西很多，因此这个产出物通常是一个复合的结构，里面包含了lex、lex的长度、lex的位置等信息。token是供语法分析器使用的，用以校验语法。</p>
+<h1 id="parser-h"><a href="#parser-h" class="headerlink" title="parser.h"></a>parser.h</h1><pre><code class="hljs c++"><span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * @Author: Nestcc</span>
+<span class="hljs-comment"> * @Date: 2021-03-12 17:18:38</span>
+<span class="hljs-comment"> * @LastEditors: Nestcc</span>
+<span class="hljs-comment"> * @LastEditTime: 2021-03-16 12:21:56</span>
+<span class="hljs-comment"> * @Description:  &lt; file content &gt;</span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> _PARSER_H_</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _PARSER_H_</span>
+
+<span class="hljs-keyword">enum</span> TokenType &#123;
+    TOKEN_UNKNOWN,
+
+    <span class="hljs-comment">// data type</span>
+    TOKEN_NUM,
+    TOKEN_STRING,
+    TOKEN_ID,
+    TOKEN_INTERPOLATION,
+
+    <span class="hljs-comment">// key word</span>
+    TOKEN_VAR,		        <span class="hljs-comment">//'var'</span>
+    TOKEN_FUN,		        <span class="hljs-comment">//'fun'</span>
+    TOKEN_IF,		        <span class="hljs-comment">//'if'</span>
+    TOKEN_ELSE,	     	    <span class="hljs-comment">//'else'	</span>
+    TOKEN_TRUE,	     	    <span class="hljs-comment">//'true'</span>
+    TOKEN_FALSE,	     	    <span class="hljs-comment">//'false'</span>
+    TOKEN_WHILE,	     	    <span class="hljs-comment">//'while'</span>
+    TOKEN_FOR,	     	    <span class="hljs-comment">//'for'</span>
+    TOKEN_BREAK,	     	    <span class="hljs-comment">//'break'</span>
+    TOKEN_CONTINUE,          <span class="hljs-comment">//'continue'</span>
+    TOKEN_RETURN,     	    <span class="hljs-comment">//'return'</span>
+    TOKEN_NULL,	     	    <span class="hljs-comment">//'null'</span>
+
+    <span class="hljs-comment">// class and module</span>
+    TOKEN_CLASS,	     	    <span class="hljs-comment">//'class'</span>
+    TOKEN_THIS,	     	    <span class="hljs-comment">//'this'</span>
+    TOKEN_STATIC,     	   <span class="hljs-comment">//'static'</span>
+    TOKEN_IS,		   <span class="hljs-comment">// 'is'</span>
+    TOKEN_SUPER,	     	   <span class="hljs-comment">//'super'</span>
+    TOKEN_IMPORT,     	   <span class="hljs-comment">//'import'</span>
+
+    <span class="hljs-comment">//分隔符</span>
+    TOKEN_COMMA,		   <span class="hljs-comment">//','</span>
+    TOKEN_COLON,		   <span class="hljs-comment">//':'</span>
+    TOKEN_LEFT_PAREN,	   <span class="hljs-comment">//'('</span>
+    TOKEN_RIGHT_PAREN,	   <span class="hljs-comment">//')'</span>
+    TOKEN_LEFT_BRACKET,	   <span class="hljs-comment">//'['</span>
+    TOKEN_RIGHT_BRACKET,	   <span class="hljs-comment">//']'</span>
+    TOKEN_LEFT_BRACE,	   <span class="hljs-comment">//'&#123;'</span>
+    TOKEN_RIGHT_BRACE,	   <span class="hljs-comment">//'&#125;'</span>
+    TOKEN_DOT,		   <span class="hljs-comment">//'.'</span>
+    TOKEN_DOT_DOT,	   <span class="hljs-comment">//'..'</span>
+
+    <span class="hljs-comment">//简单双目运算符</span>
+    TOKEN_ADD,		   <span class="hljs-comment">//'+'</span>
+    TOKEN_SUB,		   <span class="hljs-comment">//'-'</span>
+    TOKEN_MUL,		   <span class="hljs-comment">//'*' </span>
+    TOKEN_DIV,		   <span class="hljs-comment">//'/' </span>
+    TOKEN_MOD,		   <span class="hljs-comment">//'%'</span>
+
+    <span class="hljs-comment">//赋值运算符</span>
+    TOKEN_ASSIGN,	   <span class="hljs-comment">//'='</span>
+
+    <span class="hljs-comment">// 位运算符</span>
+    TOKEN_BIT_AND,	   <span class="hljs-comment">//'&amp;'</span>
+    TOKEN_BIT_OR,	   <span class="hljs-comment">//'|'</span>
+    TOKEN_BIT_NOT,	   <span class="hljs-comment">//'~'</span>
+    TOKEN_BIT_SHIFT_RIGHT,  <span class="hljs-comment">//'&gt;&gt;'</span>
+    TOKEN_BIT_SHIFT_LEFT,   <span class="hljs-comment">//'&lt;&lt;'</span>
+
+    <span class="hljs-comment">// 逻辑运算符</span>
+    TOKEN_LOGIC_AND,	   <span class="hljs-comment">//'&amp;&amp;'</span>
+    TOKEN_LOGIC_OR,	   <span class="hljs-comment">//'||'</span>
+    TOKEN_LOGIC_NOT,	   <span class="hljs-comment">//'!'</span>
+
+    <span class="hljs-comment">//关系操作符</span>
+    TOKEN_EQUAL,		   <span class="hljs-comment">//'=='</span>
+    TOKEN_NOT_EQUAL,	   <span class="hljs-comment">//'!='</span>
+    TOKEN_GREATE,	   <span class="hljs-comment">//'&gt;'</span>
+    TOKEN_GREATE_EQUAL,	   <span class="hljs-comment">//'&gt;='</span>
+    TOKEN_LESS,		   <span class="hljs-comment">//'&lt;'</span>
+    TOKEN_LESS_EQUAL,	   <span class="hljs-comment">//'&lt;='</span>
+
+    TOKEN_QUESTION,	   <span class="hljs-comment">//'?'</span>
+
+    <span class="hljs-comment">//文件结束标记,仅词法分析时使用</span>
+    TOKEN_EOF		   <span class="hljs-comment">//'EOF'</span>
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Token</span> &#123;</span>
+    TokenType type;
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *start;
+    <span class="hljs-keyword">uint32_t</span> length;
+    <span class="hljs-keyword">uint32_t</span> line_no;
+&#125;;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Parser</span> &#123;</span>
+<span class="hljs-keyword">public</span>:
+    Parser() = <span class="hljs-keyword">default</span>;
+    Parser(VM *vm, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *sourceCode);
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * @description: 获取前一个字符</span>
+<span class="hljs-comment">     * @param &#123;*&#125;</span>
+<span class="hljs-comment">     * @return &#123;*&#125;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">look_ahead</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/** </span>
+<span class="hljs-comment">     * @description: 下一个字符是否是期望的，是则读入并返回true，否则返回false</span>
+<span class="hljs-comment">     * @param &#123;*&#125;</span>
+<span class="hljs-comment">     * @return &#123;*&#125;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">metch_token</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * @description: 跳过连续的空白</span>
+<span class="hljs-comment">     * @param &#123;*&#125;</span>
+<span class="hljs-comment">     * @return &#123;*&#125;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">skip_blanks</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * @description: 解析token</span>
+<span class="hljs-comment">     * @param &#123;TokenType&#125; type</span>
+<span class="hljs-comment">     * @return &#123;*&#125;</span>
+<span class="hljs-comment">     */</span>    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">parse_id</span><span class="hljs-params">(TokenType type)</span></span>;
+
+    <span class="hljs-comment">/**</span>
+<span class="hljs-comment">     * @description: </span>
+<span class="hljs-comment">     * @param &#123;*&#125;</span>
+<span class="hljs-comment">     * @return &#123;*&#125;</span>
+<span class="hljs-comment">     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">get_next_token</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">consume_curr_token</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">consume_next_token</span><span class="hljs-params">()</span></span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">metch_next_char</span><span class="hljs-params">(<span class="hljs-keyword">char</span> expected_char)</span></span>;
+
+
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file;
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *source_code;
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *next_char_ptr;
+    <span class="hljs-keyword">char</span> curr_char;
+    Token curr_token;
+    Token prev_token;
+    VM *vm;
+
+    Parser *parent;
+
+    <span class="hljs-comment">// 处于内嵌表达式之中时,期望的右括号数量.</span>
+    <span class="hljs-comment">// 用于跟踪小括号对儿的嵌套</span>
+    <span class="hljs-keyword">int</span> interpolation_expect_rparen_num;
+
+    
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">get_next_char</span><span class="hljs-params">()</span></span>;
+&#125;;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></code></pre>
+
+
+
+
+
+
+
+<h1 id="parser-cpp"><a href="#parser-cpp" class="headerlink" title="parser.cpp"></a>parser.cpp</h1><pre><code class="hljs c++"><span class="hljs-comment">/*</span>
+<span class="hljs-comment"> * @Author: Nestcc</span>
+<span class="hljs-comment"> * @Date: 2021-03-12 17:18:43</span>
+<span class="hljs-comment"> * @LastEditors: Nestcc</span>
+<span class="hljs-comment"> * @LastEditTime: 2021-03-16 12:27:10</span>
+<span class="hljs-comment"> * @Description:  &lt; file content &gt; </span>
+<span class="hljs-comment"> */</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"common.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"vm.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">"parser.h"</span></span>
+
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">KeywordToken</span> &#123;</span>
+    <span class="hljs-keyword">char</span> *keyword;
+    <span class="hljs-keyword">uint8_t</span>     length;
+    TokenType   token;
+&#125;;  <span class="hljs-comment">//关键字(保留字)结构</span>
+
+<span class="hljs-comment">//关键字查找表</span>
+KeywordToken keywords_token[] = &#123;
+   &#123;<span class="hljs-string">"var"</span>,      <span class="hljs-number">3</span>,  TOKEN_VAR&#125;,
+   &#123;<span class="hljs-string">"fun"</span>,      <span class="hljs-number">3</span>,  TOKEN_FUN&#125;,
+   &#123;<span class="hljs-string">"if"</span>,       <span class="hljs-number">2</span>,  TOKEN_IF&#125;,
+   &#123;<span class="hljs-string">"else"</span>,     <span class="hljs-number">4</span>,  TOKEN_ELSE&#125;,
+   &#123;<span class="hljs-string">"true"</span>,     <span class="hljs-number">4</span>,  TOKEN_TRUE&#125;,
+   &#123;<span class="hljs-string">"false"</span>,    <span class="hljs-number">5</span>,  TOKEN_FALSE&#125;,
+   &#123;<span class="hljs-string">"while"</span>,	<span class="hljs-number">5</span>,  TOKEN_WHILE&#125;,
+   &#123;<span class="hljs-string">"for"</span>,	    <span class="hljs-number">3</span>,  TOKEN_FOR&#125;,
+   &#123;<span class="hljs-string">"break"</span>,    <span class="hljs-number">5</span>,  TOKEN_BREAK&#125;,
+   &#123;<span class="hljs-string">"continue"</span>, <span class="hljs-number">8</span>,  TOKEN_CONTINUE&#125;,
+   &#123;<span class="hljs-string">"return"</span>,   <span class="hljs-number">6</span>,  TOKEN_RETURN&#125;,
+   &#123;<span class="hljs-string">"null"</span>,     <span class="hljs-number">4</span>,  TOKEN_NULL&#125;,
+   &#123;<span class="hljs-string">"class"</span>,    <span class="hljs-number">5</span>,  TOKEN_CLASS&#125;,
+   &#123;<span class="hljs-string">"is"</span>,       <span class="hljs-number">2</span>,  TOKEN_IS&#125;,
+   &#123;<span class="hljs-string">"static"</span>,   <span class="hljs-number">6</span>,  TOKEN_STATIC&#125;,
+   &#123;<span class="hljs-string">"this"</span>,     <span class="hljs-number">4</span>,  TOKEN_THIS&#125;,
+   &#123;<span class="hljs-string">"super"</span>,    <span class="hljs-number">5</span>,  TOKEN_SUPER&#125;,
+   &#123;<span class="hljs-string">"import"</span>,   <span class="hljs-number">6</span>,  TOKEN_IMPORT&#125;,
+   &#123;<span class="hljs-literal">NULL</span>,       <span class="hljs-number">0</span>,  TOKEN_UNKNOWN&#125;
+&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">static</span> TokenType <span class="hljs-title">id_or_keyword</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *str, <span class="hljs-keyword">size_t</span> length)</span> </span>&#123;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; keywords_token[i].keyword; i += <span class="hljs-number">1</span>) &#123;
+        <span class="hljs-keyword">if</span> (keywords_token[i].length == length &amp;&amp; 
+        <span class="hljs-built_in">memcpy</span>(keywords_token[i].keyword, str, length) == <span class="hljs-number">0</span>) &#123;
+            <span class="hljs-keyword">return</span> keywords_token[i].token;
+        &#125;
+    &#125;
+
+    <span class="hljs-keyword">return</span> TOKEN_ID;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">char</span> <span class="hljs-title">Parser::look_ahead</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">return</span> *next_char_ptr;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Parser::metch_next_char</span><span class="hljs-params">(<span class="hljs-keyword">char</span> expected_char)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (look_ahead() == expected_char) &#123;
+        get_next_char();
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Parser::get_next_char</span><span class="hljs-params">()</span> </span>&#123;
+    curr_char = *next_char_ptr++;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Parser::skip_blanks</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">isspace</span>(curr_char)) &#123;
+        <span class="hljs-keyword">if</span> (curr_char == <span class="hljs-string">'\n'</span>) &#123; curr_token.line_no += <span class="hljs-number">1</span>; &#125;
+        get_next_char();
+    &#125;
+    <span class="hljs-keyword">return</span> ;
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Parser::parse_id</span><span class="hljs-params">(TokenType type)</span> </span>&#123;
+    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">isalnum</span>(curr_char) || curr_char == <span class="hljs-string">'_'</span>) &#123;
+        get_next_char();
+    &#125;
+
+    <span class="hljs-keyword">size_t</span> wlen = (<span class="hljs-keyword">size_t</span>) (next_char_ptr - curr_token.start - <span class="hljs-number">1</span>);
+
+    <span class="hljs-keyword">if</span> (type != TOKEN_UNKNOWN) &#123; curr_token.type = type; &#125;
+    <span class="hljs-keyword">else</span> &#123; curr_token.type = id_or_keyword(curr_token.start, wlen); &#125;
+
+    curr_token.length = wlen;
+    <span class="hljs-keyword">return</span> ;
+&#125;
+
+Parser::Parser(VM* vm, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* file, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* source_code) &#123;
+    <span class="hljs-keyword">this</span> -&gt; vm = vm;
+    <span class="hljs-keyword">this</span> -&gt; file = file;
+    <span class="hljs-keyword">this</span> -&gt; source_code = source_code;
+
+    curr_char = *<span class="hljs-keyword">this</span> -&gt; source_code;
+    next_char_ptr = <span class="hljs-keyword">this</span> -&gt; source_code + <span class="hljs-number">1</span>;
+    curr_token.line_no = <span class="hljs-number">1</span>;
+    curr_token.type = TOKEN_UNKNOWN;
+    curr_token.start = <span class="hljs-literal">nullptr</span>;
+    curr_token.length = <span class="hljs-number">0</span>;
+    
+    prev_token = curr_token;
+    
+    interpolation_expect_rparen_num = <span class="hljs-number">0</span>;
+
+&#125;;</code></pre>
+
+
+
+
+</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <div>
+      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+      <i class="iconfont icon-love"></i>
+      <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener">
+        <span>Fluid</span></a>
+    </div>
+    
+
+    
+
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "自制编程语言--Tohka&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

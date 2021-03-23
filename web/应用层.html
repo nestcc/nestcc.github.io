@@ -15,7 +15,7 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
-  <meta name="author" content="Necc Joe">
+  <meta name="author" content="Nestor Zhao">
   <meta name="keywords" content="">
   <title>page.title - Nestcc Space</title>
 
@@ -149,10 +149,70 @@
                 
 
 <div class="page-content">
-  <h1 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h1><p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/image-20201205142307455.png" srcset="/img/loading.gif" alt="image-20201205142307455"></p>
+  <h1 id="网络应用程序体系结构"><a href="#网络应用程序体系结构" class="headerlink" title="网络应用程序体系结构"></a>网络应用程序体系结构</h1><ul>
+<li>CS</li>
+<li>P2P</li>
+</ul>
+<h2 id="P2P特点"><a href="#P2P特点" class="headerlink" title="P2P特点"></a>P2P特点</h2><ul>
+<li>两方为对等方，具有良好的扩展性</li>
+<li>挑战<ul>
+<li>ISP友好</li>
+<li>安全性</li>
+<li>合适的激励</li>
+</ul>
+</li>
+</ul>
+<h1 id="进程与计算机网络之间的接口"><a href="#进程与计算机网络之间的接口" class="headerlink" title="进程与计算机网络之间的接口"></a>进程与计算机网络之间的接口</h1><ul>
+<li>socket是网络与应用程序之间的API</li>
+<li>应用程序对网络的控制仅限于<code>选择协议</code>和<code>设定参数</code></li>
+</ul>
+<h1 id="可供应用程序使用的运输服务"><a href="#可供应用程序使用的运输服务" class="headerlink" title="可供应用程序使用的运输服务"></a>可供应用程序使用的运输服务</h1><ul>
+<li>可靠数据传输</li>
+<li>吞吐量</li>
+<li>定时</li>
+<li>安全性</li>
+</ul>
+<h1 id="HTTP"><a href="#HTTP" class="headerlink" title="HTTP"></a>HTTP</h1><p><strong>请求-响应行为</strong></p>
+<p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/Snipaste_2020-12-12_14-04-20.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-12_14-04-20"></p>
+<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ol>
+<li>不用担心丢失数据，也不用关注TCP在网络中的数据丢失和乱序等故障。</li>
+<li>无状态协议，服务器不需要存储关于客户的状态信息。</li>
+<li>服务器总处于打开状态，具有一个固定的IP。</li>
+<li>使用了CS结构。</li>
+</ol>
+<h2 id="持续链接和非持续链接"><a href="#持续链接和非持续链接" class="headerlink" title="持续链接和非持续链接"></a>持续链接和非持续链接</h2><ul>
+<li>HTTP客户端进程发起一个到服务区的TCP链接，使用默认端口80，在服务器上和客户端都有一个socket与之对应。</li>
+<li>HTTP客户端经它的socket向服务器发送请求报文。报文中包好了要请求的对象。</li>
+<li>HTTP服务器接收该报文，从服务器上检索对象，在HTTP响应报文中封装该对象，并通过socket发送。</li>
+<li>HTTP服务器通知TCP断开TCP连接。</li>
+<li>HTTP客户端收到响应报文，TCP链接关闭。</li>
+<li>对于多个对象重复以上步骤。</li>
+</ul>
+<h2 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h2><ul>
+<li>GET</li>
+<li>POST</li>
+<li>HEAD</li>
+<li>PUT</li>
+<li>DELETE</li>
+</ul>
+<h1 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h1><p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/Snipaste_2020-12-14_18-39-48.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-14_18-39-48"></p>
+<ul>
+<li>HTTPS需要到CA申请证书。   </li>
+<li>HTTP信息是明文传输，HTTPS是具有安全性的ssl加密传输协议。</li>
+<li>HTTP和HTTPS使用的是完全不同的链接方式，使用的端口也不一样，前者是80，后者是443。</li>
+<li>HTTP是简单的、无状态的链接。</li>
+<li>HTTPS是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，要比HTTP更安全。</li>
+</ul>
+<h1 id="WEB缓存器（代理服务器）"><a href="#WEB缓存器（代理服务器）" class="headerlink" title="WEB缓存器（代理服务器）"></a>WEB缓存器（代理服务器）</h1><p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/Snipaste_2020-12-14_14-36-43.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-14_14-36-43"></p>
+<h2 id="WEB缓存器的优点"><a href="#WEB缓存器的优点" class="headerlink" title="WEB缓存器的优点"></a>WEB缓存器的优点</h2><ul>
+<li>大大减少对客户请求的响应时间。</li>
+<li>减少了机构的接入链路到英特网的通信量。</li>
+<li>从整体上大大减少了英特网上的web流量，改善所有应用的性能。</li>
+</ul>
+<h1 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h1><p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/image-20201205142307455.png" srcset="/img/loading.gif" alt="image-20201205142307455"></p>
 <h2 id="双链接"><a href="#双链接" class="headerlink" title="双链接"></a>双链接</h2><p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/Snipaste_2020-12-05_14-24-09.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-05_14-24-09"></p>
 <h2 id="短链接的好处"><a href="#短链接的好处" class="headerlink" title="短链接的好处"></a>短链接的好处</h2><p>可以复用控制链接。</p>
-<h1 id="FTP常见指令"><a href="#FTP常见指令" class="headerlink" title="FTP常见指令"></a>FTP常见指令</h1><h1 id="SMTP、POP3、IMAP协议"><a href="#SMTP、POP3、IMAP协议" class="headerlink" title="SMTP、POP3、IMAP协议"></a>SMTP、POP3、IMAP协议</h1><p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/Snipaste_2020-12-05_14-39-03.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-05_14-39-03"></p>
+<h1 id="SMTP、POP3、IMAP协议"><a href="#SMTP、POP3、IMAP协议" class="headerlink" title="SMTP、POP3、IMAP协议"></a>SMTP、POP3、IMAP协议</h1><p><img src="/web/%E5%BA%94%E7%94%A8%E5%B1%82/nestcc/projects/NccBlog/source/web/Snipaste_2020-12-05_14-39-03.png" srcset="/img/loading.gif" alt="Snipaste_2020-12-05_14-39-03"></p>
 <h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1><h2 id="集中式DNS可能遇到的问题"><a href="#集中式DNS可能遇到的问题" class="headerlink" title="集中式DNS可能遇到的问题"></a>集中式DNS可能遇到的问题</h2><ol>
 <li>单点故障</li>
 <li>通信容量大</li>
@@ -162,8 +222,10 @@
 <h2 id="DNS查询"><a href="#DNS查询" class="headerlink" title="DNS查询"></a>DNS查询</h2><p>![image-20201205150355922](/Users/nestcc/Library/Application Support/typora-user-images/image-20201205150355922.png)</p>
 <h2 id="DNS记录"><a href="#DNS记录" class="headerlink" title="DNS记录"></a>DNS记录</h2><p>(Name, Value, Type, TTL)</p>
 <ol>
-<li>Type = A : name 主机名, value ip</li>
-<li>Type = NS : name 域, value 权威DNS的主机名</li>
+<li>Type = A : name 主机名, value为ip</li>
+<li>Type = NS : name 域, value 为权威DNS服务器的主机名</li>
+<li>Type = CNAME : name为主机别名, value是个规范主机名</li>
+<li>Type = MX : name是邮件主机别名, value是规范主机名</li>
 </ol>
 
 </div>
